@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'users',
     'occupations',
+    'posts',
 
     'rest_framework'
 ]
