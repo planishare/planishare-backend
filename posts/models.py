@@ -16,7 +16,7 @@ class Axis(models.Model):
     def __str__(self) -> str:
         return self.name;
 
-class AcademicYear(models.Model):
+class AcademicLevel(models.Model):
     name = models.CharField(max_length=255, blank=False)
 
     def __str__(self) -> str:
@@ -29,7 +29,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255, blank=False)
     description = models.CharField(max_length=1000, blank=True)
     image = models.CharField(max_length=255, blank=False)
-    academic_year = models.ForeignKey(AcademicYear, on_delete=models.SET_NULL, null=True, related_name='academic_years')
+    academic_level = models.ForeignKey(AcademicLevel, on_delete=models.SET_NULL, null=True, related_name='academic_levels')
     axis = models.ForeignKey(Axis, on_delete=models.SET_NULL, null=True, related_name='axis')
     main_file = models.CharField(max_length=255, blank=False)
     suporting_material = models.CharField(max_length=2000, blank=True)
