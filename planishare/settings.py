@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'occupations',
     'posts',
     'reactions',
+    'api',
 
     'rest_framework'
 ]
