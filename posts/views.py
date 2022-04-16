@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from .models import AcademicLevel, Axis, Subject, Post
 from .serializers import \
     AcademicLevelSerializer, \
@@ -9,6 +9,7 @@ from .serializers import \
     PostUpdateSerializer
 
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
@@ -25,6 +26,15 @@ class SubjectListAPIView(generics.ListAPIView):
 class PostListAPIView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
+
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    search_fields = [
+        'title',
+        'academic_level__name',
+        'axis__name',
+        'axis__subject__name'
+    ]
+    filterset_fields = ['user__id', 'academic_level__id', 'axis__id', 'axis__subject__id']
 
 class PostMostLikedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')[:10]

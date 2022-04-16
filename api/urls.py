@@ -38,8 +38,6 @@ urlpatterns = [
     path('posts/<int:pk>/', PostDetailAPIView.as_view(), name='detail-posts'),
     path('posts/delete/<int:pk>/', PostDeleteAPIView.as_view(), name='delete-posts'),
     path('posts/update/<int:pk>/', PostUpdateAPIView.as_view(), name='update-posts'),
-    # TODO: Filter posts by post title or file name (?title)
-    # TODO: Own posts (?user__id)
 
     # Reactions
     path('likes/create/', LikeCreateAPIView.as_view(), name='create-like'),
