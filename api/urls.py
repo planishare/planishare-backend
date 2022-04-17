@@ -1,21 +1,33 @@
 from django.urls import path, include
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
 from users.views import RegisterListAPIView, UserDetailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
-from posts.views import \
-    AcademicLevelListAPIView, \
-    AxisListAPIView, \
-    SubjectListAPIView, \
-    PostListAPIView, \
-    PostMostLikedListAPIView, \
-    PostMostDownloadedListAPIView, \
-    PostLatestListAPIView, \
-    PostCreateAPIView, \
-    PostDetailAPIView, \
-    PostUpdateAPIView, \
+from posts.views import (
+    AcademicLevelListAPIView,
+    AxisListAPIView,
+    SubjectListAPIView,
+    PostListAPIView,
+    PostMostLikedListAPIView,
+    PostMostDownloadedListAPIView,
+    PostLatestListAPIView,
+    PostCreateAPIView,
+    PostDetailAPIView,
+    PostUpdateAPIView,
     PostDeleteAPIView
+)
 from reactions.views import LikeCreateAPIView, DownloadCreateAPIView
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
+
 urlpatterns = [
+    # JWT
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
     # Ocupations
     path('educations/', EducationtListAPIView.as_view(), name='list-educations'),
     path('institutions/', InstitutionListAPIView.as_view(), name='list-institutions'),

@@ -1,12 +1,13 @@
 from rest_framework import generics, filters
 from .models import AcademicLevel, Axis, Subject, Post
-from .serializers import \
-    AcademicLevelSerializer, \
-    AxisSerializer, \
-    SubjectSerializer, \
-    PostDetailSerializer, \
-    PostCreateSerializer, \
+from .serializers import (
+    AcademicLevelSerializer,
+    AxisSerializer,
+    SubjectSerializer,
+    PostDetailSerializer,
+    PostCreateSerializer,
     PostUpdateSerializer
+)
 
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend

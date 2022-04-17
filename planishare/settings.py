@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from dotenv import dotenv_values, load_dotenv
+import datetime
 
 load_dotenv()
 
@@ -50,9 +51,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third party packages
     'rest_framework',
     'django_filters',
+    'rest_framework_simplejwt',
 
+    # Internal packages
     'users',
     'occupations',
     'posts',
@@ -146,3 +150,19 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+
+        # Third party
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ]
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ['Bearer'],
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),  # hours=3
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=2),  # days=1
+}
