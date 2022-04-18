@@ -1,4 +1,4 @@
-from rest_framework import generics, filters
+from rest_framework import generics, filters, permissions
 from .models import AcademicLevel, Axis, Subject, Post
 from .serializers import (
     AcademicLevelSerializer,
@@ -11,6 +11,7 @@ from .serializers import (
 
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
+from api.permissions import isOwner
 
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
@@ -52,6 +53,7 @@ class PostLatestListAPIView(generics.ListAPIView):
 class PostCreateAPIView(generics.CreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostCreateSerializer
+    permission_classes = [permissions.IsAuthenticated, isOwner]
 
 class PostDetailAPIView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
@@ -60,7 +62,9 @@ class PostDetailAPIView(generics.RetrieveAPIView):
 class PostUpdateAPIView(generics.UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated, isOwner]
 
 class PostDeleteAPIView(generics.DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
+    permission_classes = [permissions.IsAuthenticated, isOwner]
