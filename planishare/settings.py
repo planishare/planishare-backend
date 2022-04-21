@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework_simplejwt',
+    'corsheaders',
 
     # Internal packages
     'users',
@@ -66,6 +67,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -158,8 +160,17 @@ REST_FRAMEWORK = {
     ]
 }
 
+# JWT configuration
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ['Bearer'],
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=3),  # hours=3
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),  # days=1
+    'ROTATE_REFRESH_TOKENS': True
 }
+
+# Cors configuration
+CORS_URLS_REGEX = r'^/api/.*'  # Solo considere las rutas que sean parte de la api
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:4200'
+]
+CORS_ALLOW_CREDENTIALS = True

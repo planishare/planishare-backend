@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
 from users.views import RegisterListAPIView, UserDetailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
 from posts.views import (
