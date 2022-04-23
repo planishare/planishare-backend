@@ -1,4 +1,4 @@
-from rest_framework import generics, filters, permissions
+from rest_framework import generics, filters, permissions, pagination
 from .models import AcademicLevel, Axis, Subject, Post
 from .serializers import (
     AcademicLevelSerializer,
@@ -12,6 +12,7 @@ from .serializers import (
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from api.permissions import isOwner
+from api.utils import CustomPageNumberPagination
 
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
@@ -26,10 +27,13 @@ class SubjectListAPIView(generics.ListAPIView):
     serializer_class = SubjectSerializer
 
 class PostListAPIView(generics.ListAPIView):
-    queryset = Post.objects.all()
+    queryset = Post.objects \
+        .annotate(total_likes=Count('likes', distinct=True)) \
+        .annotate(total_downloads=Count('downloads', distinct=True))
+    
     serializer_class = PostDetailSerializer
 
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend, filters.OrderingFilter]
     search_fields = [
         'title',
         'academic_level__name',
@@ -37,13 +41,16 @@ class PostListAPIView(generics.ListAPIView):
         'axis__subject__name'
     ]
     filterset_fields = ['user__id', 'academic_level__id', 'axis__id', 'axis__subject__id']
+    ordering_fields = ['total_likes', 'total_downloads', 'created_at']
+
+    pagination_class = CustomPageNumberPagination
 
 class PostMostLikedListAPIView(generics.ListAPIView):
-    queryset = Post.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')[:10]
+    queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
     serializer_class = PostDetailSerializer
 
 class PostMostDownloadedListAPIView(generics.ListAPIView):
-    queryset = Post.objects.annotate(num_downloads=Count('downloads')).order_by('-num_downloads')[:10]
+    queryset = Post.objects.annotate(total_downloads=Count('downloads')).order_by('-total_downloads')[:10]
     serializer_class = PostDetailSerializer
 
 class PostLatestListAPIView(generics.ListAPIView):
