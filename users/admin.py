@@ -51,6 +51,8 @@ class CustomUserAdmin(UserAdmin):
     # Lista en /admin
     list_display = ('email', 'is_staff', 'is_active',)
 
+    list_per_page = 10
+
 
 # Register your models here.
 admin.site.register(User, CustomUserAdmin)

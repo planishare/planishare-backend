@@ -4,14 +4,17 @@ from .models import Education, Institution, InstitutionType
 class EducationAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
     readonly_fields=('id',)
+    list_per_page = 10
 
 class InstitutionTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
     readonly_fields=('id',)
+    list_per_page = 10
 
 class InstitutionAdmin(admin.ModelAdmin):
     list_display = ('name', 'institution_type__name', 'id')
     readonly_fields=('id',)
+    list_per_page = 10
 
     def institution_type__name(self, obj):
         return obj.institution_type.name

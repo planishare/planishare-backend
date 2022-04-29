@@ -4,6 +4,7 @@ from .models import Like, Download
 class ReactionAdmin(admin.ModelAdmin):
     list_display = ('post__title', 'post__id', 'user__email', 'created_at') # list table
     readonly_fields=('created_at',) # edit form
+    list_per_page = 10
 
     def user__email(self, obj):
         return obj.user.email
