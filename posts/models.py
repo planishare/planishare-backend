@@ -35,5 +35,5 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return f'{self.user}: {self.title}';
+        return f'({self.id}) {self.title}';
 

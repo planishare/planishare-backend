@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_simplejwt',
     'corsheaders',
+    'admin_auto_filters',
 
     # Internal packages
     'users',

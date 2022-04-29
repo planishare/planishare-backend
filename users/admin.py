@@ -3,6 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import User
 
+from admin_auto_filters.filters import AutocompleteFilterFactory
+
 class CustomUserAdmin(UserAdmin):
 
     # Fields origianales de UserAdmin modificados, se muestran el editar usuario end /admin
@@ -57,6 +59,14 @@ class CustomUserAdmin(UserAdmin):
 
     # Automcomplete select form
     autocomplete_fields = ['institution']
+
+    list_filter = [
+        # Filter select with search
+        AutocompleteFilterFactory('Institution', 'institution'),
+
+        # Regular filter
+        'education',
+    ]
 
 
 # Register your models here.
