@@ -53,6 +53,11 @@ class CustomUserAdmin(UserAdmin):
 
     list_per_page = 10
 
+    search_fields = ['email']
+
+    # Automcomplete select form
+    autocomplete_fields = ['institution']
+
 
 # Register your models here.
 admin.site.register(User, CustomUserAdmin)

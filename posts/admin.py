@@ -5,16 +5,22 @@ class SubjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
     readonly_fields=('id',)
     list_per_page = 10
+    search_fields = ['name']
 
 class AcedemicLevelAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
     readonly_fields=('id',)
     list_per_page = 10
+    search_fields = ['name']
 
 class AxisAdmin(admin.ModelAdmin):
     list_display = ('name', 'id','subject__name')
     readonly_fields=('id',)
     list_per_page = 10
+    search_fields = ['name']
+
+    # Automcomplete select form
+    autocomplete_fields = ['subject']
 
     def subject__name(self, obj):
         return obj.subject.name
@@ -23,6 +29,9 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'user', 'academic_level', 'subject__name', 'axis', 'total_likes', 'total_downloads', 'id')
     readonly_fields=('id', 'created_at', 'updated_at')
     list_per_page = 10
+    
+    # Automcomplete select form
+    autocomplete_fields = ['user', 'academic_level', 'axis']
 
     def subject__name(self, obj):
         return obj.axis.subject.name
