@@ -16,7 +16,8 @@ class CustomUserAdmin(UserAdmin):
                 "first_name",
                 "last_name",
                 "education",
-                "institution"
+                "institution",
+                "commune",
                 )
             }
         ),
@@ -58,11 +59,12 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ['email']
 
     # Automcomplete select form
-    autocomplete_fields = ['institution']
+    autocomplete_fields = ['institution', 'commune']
 
     list_filter = [
         # Filter select with search
         AutocompleteFilterFactory('Institution', 'institution'),
+        AutocompleteFilterFactory('Commune', 'commune'),
 
         # Regular filter
         'education',

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'occupations',
     'posts',
     'reactions',
+    'locations',
     'api',
 ]
 

@@ -2,6 +2,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
+from locations.serializers import CommuneSerializer
+
 from .models import User
 from reactions.models import Download, Like
 from posts.models import Post
@@ -22,6 +24,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             'last_name',
             'education',
             'institution',
+            'commune',
         ]
     
     def create(self, validated_data):
@@ -50,6 +53,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
     education = EducationSerializer()
     institution = InstitutionSerializer()
+    commune = CommuneSerializer()
 
     total_likes = serializers.SerializerMethodField(read_only=True)
     total_downloads = serializers.SerializerMethodField(read_only=True)
@@ -64,6 +68,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'last_name',
             'education',
             'institution',
+            'commune',
             'created_at',
             'updated_at',
             'total_likes',
@@ -93,6 +98,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             'last_name',
             'education',
             'institution',
+            'commune',
         ]
 
 class UserUpdatePasswordSerializer(serializers.ModelSerializer):

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 from django.contrib import auth
 from django.contrib.auth.hashers import make_password
+from locations.models import Commune
 
 from occupations.models import Education, Institution
 
@@ -77,6 +78,7 @@ class User(AbstractUser):
     email = models.CharField(max_length=255, unique=True)
     education = models.ForeignKey(Education, on_delete=models.SET_NULL, null=True, blank=True ,related_name='users')
     institution = models.ForeignKey(Institution, on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
+    commune = models.ForeignKey(Commune, on_delete=models.SET_NULL, null=True, blank=True, related_name='users')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
