@@ -6,10 +6,12 @@ from api.permissions import isUserProfile
 class RegisterListAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
+    authentication_classes = []
 
 class UserDetailAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserDetailSerializer
+    authentication_classes = []
 
 class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()

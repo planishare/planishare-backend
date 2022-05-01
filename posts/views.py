@@ -17,14 +17,17 @@ from api.utils import CustomPageNumberPagination
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
     serializer_class = AcademicLevelSerializer
+    authentication_classes = []
 
 class AxisListAPIView(generics.ListAPIView):
     queryset = Axis.objects.all()
     serializer_class = AxisSerializer
+    authentication_classes = []
 
 class SubjectListAPIView(generics.ListAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+    authentication_classes = []
 
 class PostListAPIView(generics.ListAPIView):
     queryset = Post.objects \
@@ -44,18 +47,22 @@ class PostListAPIView(generics.ListAPIView):
     ordering_fields = ['total_likes', 'total_downloads', 'created_at']
 
     pagination_class = CustomPageNumberPagination
+    authentication_classes = []
 
 class PostMostLikedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
     serializer_class = PostDetailSerializer
+    authentication_classes = []
 
 class PostMostDownloadedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_downloads=Count('downloads')).order_by('-total_downloads')[:10]
     serializer_class = PostDetailSerializer
+    authentication_classes = []
 
 class PostLatestListAPIView(generics.ListAPIView):
     queryset = Post.objects.order_by('-created_at')[:10]
     serializer_class = PostDetailSerializer
+    authentication_classes = []
 
 class PostCreateAPIView(generics.CreateAPIView):
     queryset = Post.objects.all()
@@ -65,6 +72,7 @@ class PostCreateAPIView(generics.CreateAPIView):
 class PostDetailAPIView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
+    authentication_classes = []
 
 class PostUpdateAPIView(generics.UpdateAPIView):
     queryset = Post.objects.all()
