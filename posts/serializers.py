@@ -38,6 +38,9 @@ class PostDetailSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField()
     downloads = serializers.SerializerMethodField()
 
+    # True if post is liked by request user
+    is_liked = serializers.SerializerMethodField()
+
     class Meta:
         model = Post
         fields = [
@@ -55,6 +58,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'updated_at',
             'likes',
             'downloads',
+            'is_liked',
         ]
     
     def get_likes(self, instance):
@@ -64,6 +68,14 @@ class PostDetailSerializer(serializers.ModelSerializer):
     def get_downloads(self, instance):
         downloads = instance.downloads.all().count()
         return downloads
+
+    def get_is_liked(self, instance):
+        user = self.context['request'].user
+        if (user != None):
+            likes = instance.likes.filter(user=user.id)
+            if (len(likes)):
+                return True
+        return False
 
 class PostCreateSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()

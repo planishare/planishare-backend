@@ -52,17 +52,17 @@ class PostListAPIView(generics.ListAPIView):
 class PostMostLikedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
     serializer_class = PostDetailSerializer
-    authentication_classes = []
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostDownloadedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_downloads=Count('downloads')).order_by('-total_downloads')[:10]
     serializer_class = PostDetailSerializer
-    authentication_classes = []
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostLatestListAPIView(generics.ListAPIView):
     queryset = Post.objects.order_by('-created_at')[:10]
     serializer_class = PostDetailSerializer
-    authentication_classes = []
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostCreateAPIView(generics.CreateAPIView):
     queryset = Post.objects.all()
@@ -72,7 +72,7 @@ class PostCreateAPIView(generics.CreateAPIView):
 class PostDetailAPIView(generics.RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
-    authentication_classes = []
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostUpdateAPIView(generics.UpdateAPIView):
     queryset = Post.objects.all()
