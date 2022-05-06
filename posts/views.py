@@ -47,7 +47,7 @@ class PostListAPIView(generics.ListAPIView):
     ordering_fields = ['total_likes', 'total_downloads', 'created_at']
 
     pagination_class = CustomPageNumberPagination
-    authentication_classes = []
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostLikedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
