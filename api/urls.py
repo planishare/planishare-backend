@@ -22,9 +22,9 @@ from rest_framework_simplejwt.views import TokenVerifyView
 
 urlpatterns = [
     # JWT
-    path('login/', LoginView.as_view(), name='login'),
-    path('login/token-refresh/', CookieTokenRefreshView.as_view(), name='login-token-refresh'),
-    path('login/token-verify/', TokenVerifyView.as_view(), name='login-token-verify'),
+    # path('login/', LoginView.as_view(), name='login'),
+    # path('login/token-refresh/', CookieTokenRefreshView.as_view(), name='login-token-refresh'),
+    # path('login/token-verify/', TokenVerifyView.as_view(), name='login-token-verify'),
 
     # Ocupations
     path('educations/', EducationtListAPIView.as_view(), name='list-educations'),
