@@ -30,13 +30,14 @@ SECRET_KEY = ENV['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV['DEBUG'] == 'True'
 
+# TODO: Add production backend
 ALLOWED_HOSTS = [
     'localhost',
-    'planishare-prueba.azurewebsites.net'
+    'planishare-backend-dev.azurewebsites.net'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://planishare-prueba.azurewebsites.net'
+    'https://planishare-backend-dev.azurewebsites.net'
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -104,9 +105,22 @@ WSGI_APPLICATION = 'planishare.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
+    # Postgres Database config
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': ENV['NAME'],
+        'USER': ENV['USER'],
+        'PASSWORD': ENV['PASSWORD'],
+        'HOST': ENV['HOST'],
+        'PORT': ENV['PORT'],
+        'OPTIONS': {
+            'sslmode': 'require'
+        }
     }
 }
 
