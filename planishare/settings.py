@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     # Third party packages
     'rest_framework',
     'django_filters',
-    'rest_framework_simplejwt',
     'corsheaders',
     'admin_auto_filters',
 
@@ -172,17 +171,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         # Third party
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'api.backends.FirebaseBackend',
     ]
-}
-
-# JWT configuration
-SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ['Bearer'],
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=3),  # hours=3
-    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(minutes=5),  # days=1
-    'ROTATE_REFRESH_TOKENS': True
 }
 
 # Cors configuration
