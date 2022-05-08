@@ -29,12 +29,6 @@ class FirebaseBackend(authentication.BaseAuthentication):
             decoded_token = auth.verify_id_token(id_token)
         except Exception:
             raise exceptions.AuthenticationFailed('Invalid ID Token')
-
-        # Get uid user firebase
-        try:
-            uid = decoded_token.get("uid")
-        except Exception:
-            raise exceptions.AuthenticationFailed('No such user exists')
         
         # Get email user firebase
         try:
@@ -42,11 +36,11 @@ class FirebaseBackend(authentication.BaseAuthentication):
         except Exception:
             raise exceptions.AuthenticationFailed('Email user not found')
         
-        # Verify if user exist in planishare-database
+        # If user exist in planishare-database then authenticate
         try:
             user = User.objects.get(email=email)
         except Exception:
-            raise exceptions.AuthenticationFailed('User is not registered')
+            return None
         
         if user:
             return (user, None)
