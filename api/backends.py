@@ -46,7 +46,7 @@ class FirebaseBackend(authentication.BaseAuthentication):
         try:
             user = User.objects.get(email=email)
         except Exception:
-            raise exceptions.AuthenticationFailed('Email does not exist in database')
+            raise exceptions.AuthenticationFailed('User is not registered')
         
         if user:
             return (user, None)
