@@ -10,27 +10,6 @@ from posts.models import Post
 
 from occupations.serializers import EducationSerializer, InstitutionSerializer
 
-class RegisterUserSerializer(serializers.ModelSerializer):
-    id = serializers.ReadOnlyField()
-    password = serializers.CharField(write_only=True, validators=[validate_password])
-
-    class Meta:
-        model = User
-        fields = [
-            'id',
-            'email',
-            'password',
-            'first_name',
-            'last_name',
-            'education',
-            'institution',
-            'commune',
-        ]
-    
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
-
 class UserSimpleDetailSerializer(serializers.ModelSerializer):
     email = serializers.ReadOnlyField()
     education = EducationSerializer()

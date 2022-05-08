@@ -1,15 +1,9 @@
 from rest_framework import generics, permissions
 from .models import User
-from .serializers import RegisterUserSerializer,UserDetailSerializer, UserUpdateSerializer, UserUpdatePasswordSerializer
+from .serializers import UserDetailSerializer, UserUpdateSerializer, UserUpdatePasswordSerializer
 from api.permissions import isUserProfile
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer
-
-class RegisterListAPIView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterUserSerializer
-    authentication_classes = []
 
 class UserDetailAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()

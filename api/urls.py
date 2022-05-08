@@ -1,6 +1,7 @@
 from django.urls import path
+from api.views import RegisterAPIView
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
-from users.views import IsEmailAvailable, RegisterListAPIView, UserDetailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
+from users.views import IsEmailAvailable, UserDetailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
 from posts.views import (
     AcademicLevelListAPIView,
     AxisListAPIView,
@@ -17,12 +18,14 @@ from posts.views import (
 from reactions.views import LikeCreateAPIView, DownloadCreateAPIView
 
 urlpatterns = [
+    # Authentication
+    path('auth/register/', RegisterAPIView.as_view(), name='register-user'),
+
     # Ocupations
     path('educations/', EducationtListAPIView.as_view(), name='list-educations'),
     path('institutions/', InstitutionListAPIView.as_view(), name='list-institutions'),
     
     # Users
-    path('users/create/', RegisterListAPIView.as_view(), name='create-user'),
     path('users/<int:pk>/', UserDetailAPIView.as_view(), name='detail-user'),
     path('users/update/<int:pk>/', UserUpdateAPIView.as_view(), name='update-user'),
     path('users/update-password/<int:pk>/', UserUpdatePasswordAPIView.as_view(), name='update-user-password'),
