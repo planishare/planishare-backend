@@ -4,11 +4,20 @@ from .serializers import UserDetailSerializer, UserUpdateSerializer, UserUpdateP
 from api.permissions import isUserProfile
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import exceptions
 
 class UserDetailAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserDetailSerializer
     authentication_classes = []
+
+class UserDetailByEmailAPIView(APIView):
+    def get(self, request, email, format=None):
+        try:
+            user = User.objects.get(email=email)
+        except Exception:
+            return exceptions.NotFound(f'User profile not found ({email})')
+        return Response(UserDetailSerializer(user).data)
 
 class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()

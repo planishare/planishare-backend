@@ -1,7 +1,7 @@
 from django.urls import path
 from api.views import RegisterAPIView
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
-from users.views import IsEmailAvailable, UserDetailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
+from users.views import IsEmailAvailable, UserDetailAPIView, UserDetailByEmailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
 from posts.views import (
     AcademicLevelListAPIView,
     AxisListAPIView,
@@ -27,6 +27,7 @@ urlpatterns = [
     
     # Users
     path('users/<int:pk>/', UserDetailAPIView.as_view(), name='detail-user'),
+    path('users/by-email/<str:email>/', UserDetailByEmailAPIView.as_view(), name='detail-user-by-email'),
     path('users/update/<int:pk>/', UserUpdateAPIView.as_view(), name='update-user'),
     path('users/update-password/<int:pk>/', UserUpdatePasswordAPIView.as_view(), name='update-user-password'),
 
