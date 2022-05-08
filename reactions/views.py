@@ -8,6 +8,10 @@ class LikeCreateAPIView(generics.CreateAPIView):
     serializer_class = LikeSerializer
     permission_classes = [permissions.IsAuthenticated, isOwner]
 
+class LikeDeleteAPIView(generics.DestroyAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = [permissions.IsAuthenticated, isOwner]
 
 class DownloadCreateAPIView(generics.CreateAPIView):
     queryset = Download.objects.all()

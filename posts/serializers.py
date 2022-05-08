@@ -72,10 +72,12 @@ class PostDetailSerializer(serializers.ModelSerializer):
     def get_is_liked(self, instance):
         user = self.context['request'].user
         if (user != None):
-            likes = instance.likes.filter(user=user.id)
-            if (len(likes)):
-                return True
-        return False
+            try:
+                like = instance.likes.get(user=user.id)
+                return like.id
+            except Exception:
+                return None
+        return None
 
 class PostCreateSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()

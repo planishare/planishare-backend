@@ -15,7 +15,7 @@ from posts.views import (
     PostUpdateAPIView,
     PostDeleteAPIView
 )
-from reactions.views import LikeCreateAPIView, DownloadCreateAPIView
+from reactions.views import LikeCreateAPIView, DownloadCreateAPIView, LikeDeleteAPIView
 
 urlpatterns = [
     # Authentication
@@ -48,5 +48,6 @@ urlpatterns = [
 
     # Reactions
     path('likes/create/', LikeCreateAPIView.as_view(), name='create-like'),
+    path('likes/delete/<int:pk>/', LikeDeleteAPIView.as_view(), name='delete-like'),
     path('downloads/create/', DownloadCreateAPIView.as_view(), name='create-download'),
 ]
