@@ -1,3 +1,4 @@
+import code
 from rest_framework import generics, permissions
 from .models import User
 from .serializers import UserDetailSerializer, UserUpdateSerializer, UserUpdatePasswordSerializer
@@ -16,7 +17,9 @@ class UserDetailByEmailAPIView(APIView):
         try:
             user = User.objects.get(email=email)
         except Exception:
-            return exceptions.NotFound(f'User profile not found ({email})')
+            exc = exceptions.NotFound()
+            data = {'detail': exc.detail}
+            return Response(data, exc.status_code)
         return Response(UserDetailSerializer(user).data)
 
 class UserUpdateAPIView(generics.UpdateAPIView):
