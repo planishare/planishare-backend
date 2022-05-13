@@ -15,12 +15,12 @@ class Like(models.Model):
 
 class View(models.Model):
     # Use firebase uid like oHG6J95Z4gXc7aBJpxpsNqaQ2xz1
-    firebaseUserId = models.CharField(null=False, blank=False, max_length=100);
+    firebaseUserUUID = models.CharField(null=False, blank=False, max_length=1000);
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='views')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('firebaseUserId', 'post') 
+        unique_together = ('firebaseUserUUID', 'post') 
 
     def __str__(self) -> str:
-        return f'{self.firebaseUserId} -> {self.post}';
+        return f'{self.firebaseUserUUID} -> {self.post}';
