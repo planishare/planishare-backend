@@ -15,5 +15,6 @@ class LikeDeleteAPIView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, isOwner]
 
 class ViewCreateAPIView(generics.CreateAPIView):
+    # TODO: Dont sent 404 when is already viewed
     queryset = View.objects.all()
     serializer_class = ViewSerializer

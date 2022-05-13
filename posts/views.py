@@ -13,14 +13,8 @@ from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from api.permissions import isOwner
 from api.utils import CustomPageNumberPagination
-
-# Utils
-
-# TODO: fix function
-def popularFunction(views, likes):
-    if (likes):
-        return likes/views
-    return 0
+from django.db.models import F, When, Case
+from django.db.models.lookups import GreaterThan
 
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
@@ -41,7 +35,9 @@ class PostListAPIView(generics.ListAPIView):
     queryset = Post.objects \
         .annotate(total_likes=Count('likes', distinct=True)) \
         .annotate(total_views=Count('views', distinct=True)) \
-        .annotate(popular=popularFunction(Count('views', distinct=True), Count('likes', distinct=True)))
+        .annotate(popular=Case(
+            When(GreaterThan(F('total_views'), 0), then=F('total_likes') / F('total_views'))
+        ))
     
     serializer_class = PostDetailSerializer
 
@@ -70,8 +66,12 @@ class PostMostViewedListAPIView(generics.ListAPIView):
 
 class PostMostPopularListAPIView(generics.ListAPIView):
     queryset = Post.objects \
-        .annotate(popular=popularFunction(Count('views', distinct=True), Count('likes', distinct=True))) \
-        .order_by('-popular')[:10]
+        .annotate(total_likes=Count('likes', distinct=True)) \
+        .annotate(total_views=Count('views', distinct=True)) \
+        .annotate(popular=Case(
+            When(GreaterThan(F('total_views'), 0), then=F('total_likes') / F('total_views'))
+        )) \
+        .order_by('popular')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
