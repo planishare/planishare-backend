@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Education, Institution
+from .models import Education, Institution, InstitutionType
 
 class EducationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,7 +9,17 @@ class EducationSerializer(serializers.ModelSerializer):
             'name'
         ]
 
+class InstitutionTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InstitutionType
+        fields = [
+            'id',
+            'name'
+        ]
+
 class InstitutionSerializer(serializers.ModelSerializer):
+    institution_type = InstitutionTypeSerializer()
+
     class Meta:
         model = Institution
         fields = [
@@ -17,3 +27,4 @@ class InstitutionSerializer(serializers.ModelSerializer):
             'name',
             'institution_type'
         ]
+
