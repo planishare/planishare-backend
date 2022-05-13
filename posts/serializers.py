@@ -36,9 +36,11 @@ class PostDetailSerializer(serializers.ModelSerializer):
     axis = AxisSerializer()
 
     likes = serializers.SerializerMethodField()
+    views = serializers.SerializerMethodField()
 
-    # True if post is liked by request user
-    is_liked = serializers.SerializerMethodField()
+    # Already liked o viewed by request user
+    already_liked = serializers.SerializerMethodField()
+    already_viewed = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -50,25 +52,40 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'image',
             'academic_level',
             'axis',
-                # 'subject',
             'main_file',
             'suporting_material',
             'created_at',
             'updated_at',
             'likes',
-            'is_liked',
+            'views',
+            'already_liked',
+            'already_viewed',
         ]
     
     def get_likes(self, instance):
         likes = instance.likes.all().count()
         return likes
 
-    def get_is_liked(self, instance):
+    def get_already_liked(self, instance):
         user = self.context['request'].user
         if (user != None):
             try:
                 like = instance.likes.get(user=user.id)
                 return like.id
+            except Exception:
+                return None
+        return None
+    
+    def get_views(self, instance):
+        views = instance.views.all().count()
+        return views
+
+    def get_already_viewed(self, instance):
+        user = self.context['request'].user
+        if (user != None):
+            try:
+                view = instance.views.get(user=user.id)
+                return view.id
             except Exception:
                 return None
         return None

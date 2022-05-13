@@ -5,6 +5,8 @@ from users.views import IsEmailAvailable, UserDetailAPIView, UserDetailByEmailAP
 from posts.views import (
     AcademicLevelListAPIView,
     AxisListAPIView,
+    PostMostPopularListAPIView,
+    PostMostViewedListAPIView,
     SubjectListAPIView,
     PostListAPIView,
     PostMostLikedListAPIView,
@@ -38,6 +40,8 @@ urlpatterns = [
     path('subjects/', SubjectListAPIView.as_view(), name='list-subjects'),
     path('posts/', PostListAPIView.as_view(), name='list-posts'),
     path('posts/most-liked/', PostMostLikedListAPIView.as_view(), name='list-most-liked-posts'),
+    path('posts/most-viewed/', PostMostViewedListAPIView.as_view(), name='list-most-viewed-posts'),
+    path('posts/popular/', PostMostPopularListAPIView.as_view(), name='list-popular-posts'),
     path('posts/latest/', PostLatestListAPIView.as_view(), name='list-latest-posts'),
     path('posts/create/', PostCreateAPIView.as_view(), name='create-posts'),
     path('posts/<int:pk>/', PostDetailAPIView.as_view(), name='detail-posts'),

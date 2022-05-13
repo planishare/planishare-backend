@@ -14,6 +14,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 from api.permissions import isOwner
 from api.utils import CustomPageNumberPagination
 
+# Utils
+
+# TODO: fix function
+def popularFunction(views, likes):
+    if (likes):
+        return likes/views
+    return 0
+
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
     serializer_class = AcademicLevelSerializer
@@ -31,7 +39,9 @@ class SubjectListAPIView(generics.ListAPIView):
 
 class PostListAPIView(generics.ListAPIView):
     queryset = Post.objects \
-        .annotate(total_likes=Count('likes', distinct=True))
+        .annotate(total_likes=Count('likes', distinct=True)) \
+        .annotate(total_views=Count('views', distinct=True)) \
+        .annotate(popular=popularFunction(Count('views', distinct=True), Count('likes', distinct=True)))
     
     serializer_class = PostDetailSerializer
 
@@ -43,13 +53,25 @@ class PostListAPIView(generics.ListAPIView):
         'axis__subject__name'
     ]
     filterset_fields = ['user__id', 'academic_level__id', 'axis__id', 'axis__subject__id']
-    ordering_fields = ['total_likes', 'created_at']
+    ordering_fields = ['total_likes', 'total_views', 'popular', 'created_at']
 
     pagination_class = CustomPageNumberPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostLikedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
+    serializer_class = PostDetailSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class PostMostViewedListAPIView(generics.ListAPIView):
+    queryset = Post.objects.annotate(total_views=Count('views')).order_by('-total_views')[:10]
+    serializer_class = PostDetailSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class PostMostPopularListAPIView(generics.ListAPIView):
+    queryset = Post.objects \
+        .annotate(popular=popularFunction(Count('views', distinct=True), Count('likes', distinct=True))) \
+        .order_by('-popular')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
