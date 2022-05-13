@@ -8,14 +8,13 @@ from posts.views import (
     SubjectListAPIView,
     PostListAPIView,
     PostMostLikedListAPIView,
-    PostMostDownloadedListAPIView,
     PostLatestListAPIView,
     PostCreateAPIView,
     PostDetailAPIView,
     PostUpdateAPIView,
     PostDeleteAPIView
 )
-from reactions.views import LikeCreateAPIView, DownloadCreateAPIView, LikeDeleteAPIView
+from reactions.views import LikeCreateAPIView, LikeDeleteAPIView
 
 urlpatterns = [
     # Authentication
@@ -39,7 +38,6 @@ urlpatterns = [
     path('subjects/', SubjectListAPIView.as_view(), name='list-subjects'),
     path('posts/', PostListAPIView.as_view(), name='list-posts'),
     path('posts/most-liked/', PostMostLikedListAPIView.as_view(), name='list-most-liked-posts'),
-    path('posts/most-downloaded/', PostMostDownloadedListAPIView.as_view(), name='list-most-downloaded-posts'),
     path('posts/latest/', PostLatestListAPIView.as_view(), name='list-latest-posts'),
     path('posts/create/', PostCreateAPIView.as_view(), name='create-posts'),
     path('posts/<int:pk>/', PostDetailAPIView.as_view(), name='detail-posts'),
@@ -49,5 +47,4 @@ urlpatterns = [
     # Reactions
     path('likes/create/', LikeCreateAPIView.as_view(), name='create-like'),
     path('likes/delete/<int:pk>/', LikeDeleteAPIView.as_view(), name='delete-like'),
-    path('downloads/create/', DownloadCreateAPIView.as_view(), name='create-download'),
 ]

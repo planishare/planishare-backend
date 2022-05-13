@@ -31,8 +31,7 @@ class SubjectListAPIView(generics.ListAPIView):
 
 class PostListAPIView(generics.ListAPIView):
     queryset = Post.objects \
-        .annotate(total_likes=Count('likes', distinct=True)) \
-        .annotate(total_downloads=Count('downloads', distinct=True))
+        .annotate(total_likes=Count('likes', distinct=True))
     
     serializer_class = PostDetailSerializer
 
@@ -44,18 +43,13 @@ class PostListAPIView(generics.ListAPIView):
         'axis__subject__name'
     ]
     filterset_fields = ['user__id', 'academic_level__id', 'axis__id', 'axis__subject__id']
-    ordering_fields = ['total_likes', 'total_downloads', 'created_at']
+    ordering_fields = ['total_likes', 'created_at']
 
     pagination_class = CustomPageNumberPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostLikedListAPIView(generics.ListAPIView):
     queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
-    serializer_class = PostDetailSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-class PostMostDownloadedListAPIView(generics.ListAPIView):
-    queryset = Post.objects.annotate(total_downloads=Count('downloads')).order_by('-total_downloads')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

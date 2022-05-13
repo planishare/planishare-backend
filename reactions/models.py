@@ -12,14 +12,3 @@ class Like(models.Model):
 
     def __str__(self) -> str:
         return f'{self.user} -> {self.post}';
-
-class Download(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_downloads')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='downloads')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user', 'post')
-
-    def __str__(self) -> str:
-        return f'{self.user} -> {self.post}';

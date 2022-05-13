@@ -35,7 +35,7 @@ class AxisAdmin(admin.ModelAdmin):
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'user', 'academic_level', 'subject', 'axis', 'id')
-    readonly_fields=('id', 'created_at', 'updated_at', 'total_likes', 'total_downloads',)
+    readonly_fields=('id', 'created_at', 'updated_at', 'total_likes')
     list_per_page = 10
 
     search_fields = ['title']
@@ -59,9 +59,6 @@ class PostAdmin(admin.ModelAdmin):
     def total_likes(self, obj):
         print(obj.created_at)
         return obj.likes.count()
-    
-    def total_downloads(self, obj):
-        return obj.downloads.count()
 
 # Register your models here.
 admin.site.register(Subject, SubjectAdmin)

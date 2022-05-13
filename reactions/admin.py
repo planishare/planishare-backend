@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Like, Download
+from .models import Like
 from admin_auto_filters.filters import AutocompleteFilterFactory
 
 class ReactionAdmin(admin.ModelAdmin):
@@ -24,4 +24,3 @@ class ReactionAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Like, ReactionAdmin)
-admin.site.register(Download, ReactionAdmin)
