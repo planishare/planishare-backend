@@ -131,3 +131,6 @@ dmypy.json
 
 # Visual studio code
 .vscode
+
+# Firebase
+firebase_config.json
