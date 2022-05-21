@@ -19,6 +19,14 @@ class SubjectSerializer(serializers.ModelSerializer):
             'name',
         ]
 
+class SimpleAxisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Axis
+        fields = [
+            'id',
+            'name',
+        ]
+
 class AxisSerializer(serializers.ModelSerializer):
     subject = SubjectSerializer()
 
@@ -28,6 +36,17 @@ class AxisSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'subject',
+        ]
+
+class SubjectWithAxisSerializer(serializers.ModelSerializer):
+    axis = SimpleAxisSerializer(many=True)
+
+    class Meta:
+        model = Subject
+        fields = [
+            'id',
+            'name',
+            'axis'
         ]
 
 class PostDetailSerializer(serializers.ModelSerializer):

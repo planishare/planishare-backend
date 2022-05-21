@@ -5,10 +5,16 @@ from rest_framework import exceptions
 from firebase_admin import auth, initialize_app, credentials
 
 from planishare.settings import BASE_DIR
+from dotenv import dotenv_values, load_dotenv
+
+load_dotenv()
+ENV = dotenv_values(".env")
 
 User = get_user_model() # To use custom user seted in settings
 
-cred = credentials.Certificate(os.path.join(BASE_DIR, "firebase_config.json"))
+PROD = ENV['PROD'] == 'True'
+FIREBASE_CONFIG_JSON = 'firebase_config_prod.json' if PROD else 'firebase_config.json'
+cred = credentials.Certificate(os.path.join(BASE_DIR, FIREBASE_CONFIG_JSON))
 
 initialize_app(cred)
 

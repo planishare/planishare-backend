@@ -6,7 +6,8 @@ from .serializers import (
     SubjectSerializer,
     PostDetailSerializer,
     PostCreateSerializer,
-    PostUpdateSerializer
+    PostUpdateSerializer,
+    SubjectWithAxisSerializer
 )
 
 from django.db.models import Count
@@ -29,6 +30,11 @@ class AxisListAPIView(generics.ListAPIView):
 class SubjectListAPIView(generics.ListAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+    authentication_classes = []
+
+class SubjectWithAxisListAPIView(generics.ListAPIView):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectWithAxisSerializer
     authentication_classes = []
 
 class PostListAPIView(generics.ListAPIView):

@@ -14,7 +14,8 @@ from posts.views import (
     PostCreateAPIView,
     PostDetailAPIView,
     PostUpdateAPIView,
-    PostDeleteAPIView
+    PostDeleteAPIView,
+    SubjectWithAxisListAPIView
 )
 from reactions.views import LikeCreateAPIView, LikeDeleteAPIView, ViewCreateAPIView
 
@@ -38,6 +39,7 @@ urlpatterns = [
     path('academic-levels/', AcademicLevelListAPIView.as_view(), name='list-academic-levels'),
     path('axis/', AxisListAPIView.as_view(), name='list-axis'),
     path('subjects/', SubjectListAPIView.as_view(), name='list-subjects'),
+    path('subjects-with-axis/', SubjectWithAxisListAPIView.as_view(), name='list-subjects-axis'),
     path('posts/', PostListAPIView.as_view(), name='list-posts'),
     path('posts/most-liked/', PostMostLikedListAPIView.as_view(), name='list-most-liked-posts'),
     path('posts/most-viewed/', PostMostViewedListAPIView.as_view(), name='list-most-viewed-posts'),
