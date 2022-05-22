@@ -1,5 +1,6 @@
 from django.urls import path
 from api.views import RegisterAPIView
+from locations.views import RegionWithCommunesListAPIView
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
 from users.views import IsEmailAvailable, UserDetailAPIView, UserDetailByEmailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
 from posts.views import (
@@ -26,6 +27,9 @@ urlpatterns = [
     # Ocupations
     path('educations/', EducationtListAPIView.as_view(), name='list-educations'),
     path('institutions/', InstitutionListAPIView.as_view(), name='list-institutions'),
+
+    # Locations
+    path('regions-with-communes/', RegionWithCommunesListAPIView.as_view(), name='list-regions-communes'),
     
     # Users
     path('users/<int:pk>/', UserDetailAPIView.as_view(), name='detail-user'),
