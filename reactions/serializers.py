@@ -29,12 +29,12 @@ class ViewSerializer(serializers.ModelSerializer):
             'created_at',
         ]
 
-    def validate(self, attrs):
-        try:
-            firebaseUserUUID = auth.verify_id_token(attrs["firebaseUserUUID"])
-            print(firebaseUserUUID)
-        except Exception:
-            raise serializers.ValidationError("Invalid FirebaseUserUUID")
-        return super().validate(attrs)
+    # def validate(self, attrs):
+    #     try:
+    #         firebaseUserUUID = auth.verify_id_token(attrs["firebaseUserUUID"])
+    #         print(firebaseUserUUID)
+    #     except Exception:
+    #         raise serializers.ValidationError("Invalid FirebaseUserUUID")
+    #     return super().validate(attrs)
 
     # TODO: Register user if is auth

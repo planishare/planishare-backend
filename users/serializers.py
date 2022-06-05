@@ -5,7 +5,7 @@ from rest_framework import serializers
 from locations.serializers import CommuneSerializer
 
 from .models import User
-from reactions.models import Like
+from reactions.models import Like, View
 from posts.models import Post
 
 from occupations.serializers import EducationSerializer, InstitutionSerializer
@@ -35,6 +35,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
     commune = CommuneSerializer()
 
     total_likes = serializers.SerializerMethodField(read_only=True)
+    total_views = serializers.SerializerMethodField(read_only=True)
     total_posts = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -50,6 +51,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
             'total_likes',
+            'total_views',
             'total_posts',
         ]
     
@@ -58,6 +60,10 @@ class UserDetailSerializer(serializers.ModelSerializer):
         likes = Like.objects.filter(post__user=obj.id).count()
         # data = LikeSerializer(likes, many=True).data
         return likes
+    
+    def get_total_views(self, obj):
+        views = View.objects.filter(post__user=obj.id).count()
+        return views
 
     def get_total_posts(self, obj):
         posts = Post.objects.filter(user=obj.id).count()
