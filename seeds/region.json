@@ -1,0 +1,130 @@
+[
+    {
+        "model": "locations.region",
+        "pk": 1,
+        "fields": {
+            "name": "Arica y Parinacota",
+            "number": "XV"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 2,
+        "fields": {
+            "name": "Tarapacá",
+            "number": "I"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 3,
+        "fields": {
+            "name": "Antofagasta",
+            "number": "II"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 4,
+        "fields": {
+            "name": "Atacama",
+            "number": "III"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 5,
+        "fields": {
+            "name": "Coquimbo",
+            "number": "IV"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 6,
+        "fields": {
+            "name": "Valparaíso",
+            "number": "V"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 7,
+        "fields": {
+            "name": "Metropolitana de Santiago",
+            "number": "XIII"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 8,
+        "fields": {
+            "name": "Libertador Gral. Bernardo O’Higgins",
+            "number": "VI"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 9,
+        "fields": {
+            "name": "Maule",
+            "number": "VII"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 10,
+        "fields": {
+            "name": "Ñuble",
+            "number": "XVI"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 11,
+        "fields": {
+            "name": "Biobío",
+            "number": "VIII"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 12,
+        "fields": {
+            "name": "Araucanía",
+            "number": "IX"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 13,
+        "fields": {
+            "name": "Los Ríos",
+            "number": "XIV"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 14,
+        "fields": {
+            "name": "Los Lagos",
+            "number": "X"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 15,
+        "fields": {
+            "name": "Aisén del Gral. Carlos Ibáñez del Campo",
+            "number": "XI"
+        }
+    },
+    {
+        "model": "locations.region",
+        "pk": 16,
+        "fields": {
+            "name": "Magallanes y de la Antártica Chilena",
+            "number": "XII"
+        }
+    }
+]

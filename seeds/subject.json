@@ -1,0 +1,93 @@
+[
+    {
+        "model": "posts.subject",
+        "pk": 1,
+        "fields": {
+            "name": "Artes Visuales"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 2,
+        "fields": {
+            "name": "Ciencias Naturales"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 3,
+        "fields": {
+            "name": "Educación ciudadana"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 4,
+        "fields": {
+            "name": "Educación Física y Salud"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 5,
+        "fields": {
+            "name": "Historia, Geografía y Ciencias Sociales"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 6,
+        "fields": {
+            "name": "Inglés"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 7,
+        "fields": {
+            "name": "Lengua Indígena"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 8,
+        "fields": {
+            "name": "Lenguaje y Comunicación"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 9,
+        "fields": {
+            "name": "Lengua y Cultura de los Pueblos Originarios Ancestrales"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 10,
+        "fields": {
+            "name": "Matemática"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 11,
+        "fields": {
+            "name": "Música"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 12,
+        "fields": {
+            "name": "Orientación"
+        }
+    },
+    {
+        "model": "posts.subject",
+        "pk": 13,
+        "fields": {
+            "name": "Tecnología"
+        }
+    }
+]

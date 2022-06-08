@@ -1,0 +1,30 @@
+[
+    {
+        "model": "occupations.institutiontype",
+        "pk": 1,
+        "fields": {
+            "name": "Universidad"
+        }
+    },
+    {
+        "model": "occupations.institutiontype",
+        "pk": 2,
+        "fields": {
+            "name": "Instituto Profesional"
+        }
+    },
+    {
+        "model": "occupations.institutiontype",
+        "pk": 3,
+        "fields": {
+            "name": "Centro de Formación Técnica"
+        }
+    },
+    {
+        "model": "occupations.institutiontype",
+        "pk": 4,
+        "fields": {
+            "name": "Colegio"
+        }
+    }
+]

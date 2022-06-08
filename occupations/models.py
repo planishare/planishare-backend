@@ -16,4 +16,3 @@ class Institution(models.Model):
     institution_type = models.ForeignKey(InstitutionType, on_delete=models.CASCADE, related_name='institutions')
     def __str__(self) -> str:
         return self.name;
-

@@ -1,0 +1,530 @@
+[
+    {
+        "model": "posts.axis",
+        "pk": 1,
+        "fields": {
+            "name": "Expresar y crear visualmente",
+            "subject": 1
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 2,
+        "fields": {
+            "name": "Apreciar y responder frente al arte",
+            "subject": 1
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 3,
+        "fields": {
+            "name": "Difundir y comunicar",
+            "subject": 1
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 4,
+        "fields": {
+            "name": "Actitudes",
+            "subject": 1
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 5,
+        "fields": {
+            "name": "Habilidades y etapas de la investigación científica",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 6,
+        "fields": {
+            "name": "Ciencias de la Vida",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 7,
+        "fields": {
+            "name": "Ciencias Físicas y Químicas",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 8,
+        "fields": {
+            "name": "Ciencias de la Tierra y el Universo",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 9,
+        "fields": {
+            "name": "Analizar e interpretar datos",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 10,
+        "fields": {
+            "name": "Biología celular y molecular",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 11,
+        "fields": {
+            "name": "Biología de los ecosistemas",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 12,
+        "fields": {
+            "name": "Ciencias de la salud",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 13,
+        "fields": {
+            "name": "Construir explicaciones y diseñar soluciones",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 14,
+        "fields": {
+            "name": "Biología",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 15,
+        "fields": {
+            "name": "Física",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 16,
+        "fields": {
+            "name": "Química",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 17,
+        "fields": {
+            "name": "Actitudes",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 18,
+        "fields": {
+            "name": "Ciencias para la ciudadanía",
+            "subject": 2
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 19,
+        "fields": {
+            "name": "Habilidades motrices",
+            "subject": 4
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 20,
+        "fields": {
+            "name": "Vida activa y saludable",
+            "subject": 4
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 21,
+        "fields": {
+            "name": "Seguridad, juego limpio y liderazgo",
+            "subject": 4
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 22,
+        "fields": {
+            "name": "Ciencias del ejercicio físico y deportivo",
+            "subject": 4
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 23,
+        "fields": {
+            "name": "Educación Física y Salud Actitudes",
+            "subject": 4
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 24,
+        "fields": {
+            "name": "Historia",
+            "subject": 5
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 25,
+        "fields": {
+            "name": "Geografía",
+            "subject": 5
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 26,
+        "fields": {
+            "name": "Formación ciudadana",
+            "subject": 5
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 27,
+        "fields": {
+            "name": "Comprensión auditiva",
+            "subject": 6
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 28,
+        "fields": {
+            "name": "Comprensión oral",
+            "subject": 6
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 29,
+        "fields": {
+            "name": "Comunicación oral",
+            "subject": 6
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 30,
+        "fields": {
+            "name": "Comprensión de lectura",
+            "subject": 6
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 31,
+        "fields": {
+            "name": "Expresión oral",
+            "subject": 6
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 32,
+        "fields": {
+            "name": "Expresión escrita",
+            "subject": 6
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 33,
+        "fields": {
+            "name": "Comunicación escrita",
+            "subject": 7
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 34,
+        "fields": {
+            "name": "Lengua Indígena Objetivos Fundamentales Transversales",
+            "subject": 7
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 35,
+        "fields": {
+            "name": "Oralidad",
+            "subject": 7
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 36,
+        "fields": {
+            "name": "Comunicación oral",
+            "subject": 8
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 37,
+        "fields": {
+            "name": "Escritura",
+            "subject": 8
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 38,
+        "fields": {
+            "name": "Lectura",
+            "subject": 8
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 39,
+        "fields": {
+            "name": "Investigación sobre lengua y literatura",
+            "subject": 8
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 40,
+        "fields": {
+            "name": "Lengua, tradición oral, iconografía, prácticas de lectura y escritura de los pueblos originarios",
+            "subject": 9
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 41,
+        "fields": {
+            "name": "Territorio, territorialidad, identidad y memoria histórica de los pueblos originarios",
+            "subject": 9
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 42,
+        "fields": {
+            "name": "Cosmovisión de los pueblos originarios",
+            "subject": 9
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 43,
+        "fields": {
+            "name": "Patrimonio, tecnologías, técnicas, ciencias y artes ancestrales de los pueblos originarios",
+            "subject": 9
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 44,
+        "fields": {
+            "name": "Números y operaciones",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 45,
+        "fields": {
+            "name": "Números",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 46,
+        "fields": {
+            "name": "Patrones y álgebra",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 47,
+        "fields": {
+            "name": "Álgebra y funciones",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 48,
+        "fields": {
+            "name": "Geometría",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 49,
+        "fields": {
+            "name": "Medición",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 50,
+        "fields": {
+            "name": "Probabilidad y estadística",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 51,
+        "fields": {
+            "name": "Datos y probabilidades",
+            "subject": 10
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 52,
+        "fields": {
+            "name": "Escuchar y apreciar",
+            "subject": 11
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 53,
+        "fields": {
+            "name": "Interpretar y crear",
+            "subject": 11
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 54,
+        "fields": {
+            "name": "Reflexionar y contextualizar",
+            "subject": 11
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 55,
+        "fields": {
+            "name": "Reflexionar y relacionar",
+            "subject": 11
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 56,
+        "fields": {
+            "name": "Crecimiento personal",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 57,
+        "fields": {
+            "name": "Bienestar y autocuidado",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 58,
+        "fields": {
+            "name": "Relaciones interpersonales",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 59,
+        "fields": {
+            "name": "Participación y pertenencia",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 60,
+        "fields": {
+            "name": "Trabajo escolar",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 61,
+        "fields": {
+            "name": "Pertenencia y participación democrática",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 62,
+        "fields": {
+            "name": "Gestión y proyección del aprendizaje",
+            "subject": 12
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 63,
+        "fields": {
+            "name": "Diseñar, hacer y probar",
+            "subject": 13
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 64,
+        "fields": {
+            "name": "Resolución de problemas tecnológicos",
+            "subject": 13
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 65,
+        "fields": {
+            "name": "Tecnología, ambiente y sociedad",
+            "subject": 13
+        }
+    },
+    {
+        "model": "posts.axis",
+        "pk": 66,
+        "fields": {
+            "name": "Tecnologías de la información y la comunicación",
+            "subject": 13
+        }
+    }
+]

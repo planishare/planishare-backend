@@ -99,6 +99,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
         views = instance.views.all().count()
         return views
 
+    # TODO: Fix this when upgrade view logic
     def get_already_viewed(self, instance):
         user = self.context['request'].user
         if (user != None):

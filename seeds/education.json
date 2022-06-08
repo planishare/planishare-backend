@@ -1,0 +1,16 @@
+[
+    {
+        "model": "occupations.education",
+        "pk": 1,
+        "fields": {
+            "name": "Estudiante"
+        }
+    },
+    {
+        "model": "occupations.education",
+        "pk": 2,
+        "fields": {
+            "name": "Profesor"
+        }
+    }
+]
