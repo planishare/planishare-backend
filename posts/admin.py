@@ -36,6 +36,7 @@ class AxisAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'user', 'academic_level', 'subject', 'axis', 'id')
     readonly_fields=('id', 'created_at', 'updated_at', 'total_likes')
+    exclude = ('image',)
     list_per_page = 10
 
     search_fields = ['title']
