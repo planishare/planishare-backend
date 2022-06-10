@@ -7,6 +7,9 @@ class LikeAdmin(admin.ModelAdmin):
     readonly_fields=('created_at',) # edit form
     list_per_page = 10
 
+    # Automcomplete select form
+    autocomplete_fields = ['post', 'user']
+
     list_filter = [
         AutocompleteFilterFactory('Post', 'post'),
         AutocompleteFilterFactory('User', 'user'),
@@ -23,13 +26,17 @@ class LikeAdmin(admin.ModelAdmin):
         return obj.post.id
 
 class ViewAdmin(admin.ModelAdmin):
-    list_display = ('post__title', 'post__id', 'firebase_user_id', 'first_seen') # list table
+    list_display = ('post__title', 'post__id', 'firebase_user_id', 'user__email', 'first_seen') # list table
     readonly_fields=('first_seen',) # edit form
     list_per_page = 10
     
+    # Automcomplete select form
+    autocomplete_fields = ['post', 'user']
+
     list_filter = [
         AutocompleteFilterFactory('Post', 'post'),
         AutocompleteFilterFactory('Post owner', 'post__user'),
+        AutocompleteFilterFactory('User', 'user'),
     ]
 
     def post__title(self, obj):
@@ -37,6 +44,11 @@ class ViewAdmin(admin.ModelAdmin):
 
     def post__id(self, obj):
         return obj.post.id
+    
+    def user__email(self, obj):
+        if (obj.user):
+            return obj.user.email
+        return 'Anónimo'
 
 # Register your models here.
 admin.site.register(Like, LikeAdmin)
