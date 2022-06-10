@@ -32,7 +32,7 @@ class Post(models.Model):
     axis = models.ForeignKey(Axis, on_delete=models.SET_NULL, blank=False, null=True, related_name='axis')
     main_file = models.CharField(max_length=1000, blank=False)
     # suporting_material = models.CharField(max_length=2000, blank=True)
-    suporting_material = ArrayField(models.CharField(max_length=1000, blank=True), size=5)
+    suporting_material = ArrayField(models.CharField(max_length=1000, blank=True), size=5, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

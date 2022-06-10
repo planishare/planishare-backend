@@ -132,6 +132,7 @@ class PostCreateSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'academic_level': {'allow_null': False, 'required': True},
             'axis': {'allow_null': False, 'required': True},
+            'description': {'allow_null': True, 'required': False}
         } 
 
 class PostUpdateSerializer(serializers.ModelSerializer):
