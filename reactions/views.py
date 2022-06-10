@@ -1,8 +1,9 @@
 from rest_framework import generics, permissions
-
+from rest_framework.views import APIView
 from .models import Like, View
 from .serializers import LikeSerializer, ViewSerializer
 from api.permissions import isOwner
+from rest_framework.response import Response
 
 class LikeCreateAPIView(generics.CreateAPIView):
     queryset = Like.objects.all()
@@ -15,6 +16,5 @@ class LikeDeleteAPIView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, isOwner]
 
 class ViewCreateAPIView(generics.CreateAPIView):
-    # TODO: Dont sent 404 when is already viewed
     queryset = View.objects.all()
     serializer_class = ViewSerializer

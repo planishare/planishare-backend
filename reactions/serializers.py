@@ -17,24 +17,34 @@ class LikeSerializer(serializers.ModelSerializer):
         ]
 
 class ViewSerializer(serializers.ModelSerializer):
-    id = serializers.ReadOnlyField()
-    created_at = serializers.ReadOnlyField()
+    firebase_user_id = serializers.CharField(max_length=2000)
 
     class Meta:
         model = View
         fields = [
             'id',
-            'firebaseUserUUID',
+            'firebase_user_id',
             'post',
-            'created_at',
+            'user',
+            'first_seen',
         ]
 
-    # def validate(self, attrs):
-    #     try:
-    #         firebaseUserUUID = auth.verify_id_token(attrs["firebaseUserUUID"])
-    #         print(firebaseUserUUID)
-    #     except Exception:
-    #         raise serializers.ValidationError("Invalid FirebaseUserUUID")
-    #     return super().validate(attrs)
-
-    # TODO: Register user if is auth
+    def validate(self, attrs):
+        try:
+            user = self.context['request'].user
+            if (user):
+                print(user)
+                attrs['user'] = user if user.is_authenticated else None
+        except Exception:
+            raise serializers.ValidationError('Failed getting authenticated user')
+        return super().validate(attrs)
+    
+    def validate_firebase_user_id(self, value):
+        # Verify token
+        firebase_uid = None
+        try:
+            decoded_token = auth.verify_id_token(value)
+            firebase_uid = decoded_token.get('user_id')
+        except Exception:
+            raise serializers.ValidationError('Invalid ID Token')
+        return firebase_uid

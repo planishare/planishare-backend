@@ -23,8 +23,8 @@ class LikeAdmin(admin.ModelAdmin):
         return obj.post.id
 
 class ViewAdmin(admin.ModelAdmin):
-    list_display = ('post__title', 'post__id', 'firebaseUserUUID', 'created_at') # list table
-    readonly_fields=('created_at',) # edit form
+    list_display = ('post__title', 'post__id', 'firebase_user_id', 'first_seen') # list table
+    readonly_fields=('first_seen',) # edit form
     list_per_page = 10
     
     list_filter = [
