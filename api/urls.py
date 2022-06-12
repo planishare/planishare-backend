@@ -2,6 +2,7 @@ from django.urls import path
 from api.views import RegisterAPIView
 from locations.views import RegionWithCommunesListAPIView
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
+from reports.views import ReportCreateAPIView
 from users.views import IsEmailAvailable, UserDetailAPIView, UserDetailByEmailAPIView, UserUpdateAPIView, UserUpdatePasswordAPIView
 from posts.views import (
     AcademicLevelListAPIView,
@@ -58,4 +59,7 @@ urlpatterns = [
     path('likes/create/', LikeCreateAPIView.as_view(), name='create-like'),
     path('likes/delete/<int:pk>/', LikeDeleteAPIView.as_view(), name='delete-like'),
     path('views/create/', ViewCreateAPIView.as_view(), name='create-view'),
+    
+    # Reports
+    path('report/create/', ReportCreateAPIView.as_view(), name='create-report'),
 ]

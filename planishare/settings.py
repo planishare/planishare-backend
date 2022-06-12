@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'reactions',
     'locations',
     'api',
+    'reports'
 ]
 
 MIDDLEWARE = [
