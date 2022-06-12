@@ -178,7 +178,7 @@ REST_FRAMEWORK = {
 CORS_URLS_REGEX = r'^/api/.*'  # Solo considere las rutas que sean parte de la api
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
-    'http://192.168.1.208:4200',
+    'http://192.168.1.207:4200',
     'https://planishare-dev.web.app'
 ]
 CORS_ALLOW_CREDENTIALS = True

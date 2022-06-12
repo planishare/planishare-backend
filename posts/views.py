@@ -15,7 +15,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from api.permissions import isOwner
 from api.utils import CustomPageNumberPagination
 from django.db.models import F, When, Case
-from django.db.models.lookups import GreaterThan
+from django.db.models.lookups import GreaterThan, LessThanOrEqual
 
 class AcademicLevelListAPIView(generics.ListAPIView):
     queryset = AcademicLevel.objects.all()
@@ -75,9 +75,10 @@ class PostMostPopularListAPIView(generics.ListAPIView):
         .annotate(total_likes=Count('likes', distinct=True)) \
         .annotate(total_views=Count('views', distinct=True)) \
         .annotate(popular=Case(
-            When(GreaterThan(F('total_views'), 0), then=F('total_likes') / F('total_views'))
+            When(GreaterThan(F('total_views'), 0), then=F('total_likes') / F('total_views')),
+            When(LessThanOrEqual(F('total_views'), 0), then=0)
         )) \
-        .order_by('popular')[:10]
+        .order_by('-popular')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

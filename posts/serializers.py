@@ -57,9 +57,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField()
     views = serializers.SerializerMethodField()
 
-    # Already liked o viewed by request user
+    # Already liked by request user
     already_liked = serializers.SerializerMethodField()
-    already_viewed = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -77,8 +76,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'updated_at',
             'likes',
             'views',
-            'already_liked',
-            'already_viewed',
+            'already_liked'
         ]
     
     def get_likes(self, instance):
@@ -98,17 +96,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
     def get_views(self, instance):
         views = instance.views.all().count()
         return views
-
-    # TODO: Fix this when upgrade view logic
-    def get_already_viewed(self, instance):
-        user = self.context['request'].user
-        if (user != None):
-            try:
-                view = instance.views.get(user=user.id)
-                return view.id
-            except Exception:
-                return None
-        return None
 
 class PostCreateSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
