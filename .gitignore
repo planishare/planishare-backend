@@ -136,3 +136,5 @@ dmypy.json
 
 # Firebase
 firebase_config.json
+firebase_config_prod.json
+firebase_config_dev.json

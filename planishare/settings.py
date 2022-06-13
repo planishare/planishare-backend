@@ -29,14 +29,15 @@ SECRET_KEY = ENV['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV['DEBUG'] == 'True'
 
-# TODO: Add production backend
 ALLOWED_HOSTS = [
     'localhost',
-    'planishare-backend-dev.azurewebsites.net'
+    'planishare-backend-dev.azurewebsites.net',
+    'planishare-backend.azurewebsites.net'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://planishare-backend-dev.azurewebsites.net'
+    'https://planishare-backend-dev.azurewebsites.net',
+    'https://planishare-backend.azurewebsites.net'
 ]
 
 AUTH_USER_MODEL = 'users.User'

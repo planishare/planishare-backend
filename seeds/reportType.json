@@ -1,0 +1,16 @@
+[
+    {
+        "model": "reports.reporttype",
+        "pk": 1,
+        "fields": {
+            "name": "User report"
+        }
+    },
+    {
+        "model": "reports.reporttype",
+        "pk": 2,
+        "fields": {
+            "name": "Post report"
+        }
+    }
+]

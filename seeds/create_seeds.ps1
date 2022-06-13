@@ -13,4 +13,8 @@ python -Xutf8 manage.py dumpdata posts.subject -o .\seeds\subject.json;
 python -Xutf8 manage.py dumpdata posts.axis -o .\seeds\axis.json;
 python -Xutf8 manage.py dumpdata posts.academicLevel -o .\seeds\academicLevel.json;
 echo "Posts done!"
+
+python -Xutf8 manage.py dumpdata reports.reportType -o .\seeds\reportType.json;
+echo "Reports done!"
+
 echo "Seeds created :)"

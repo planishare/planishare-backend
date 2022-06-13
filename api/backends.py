@@ -12,9 +12,7 @@ ENV = dotenv_values(".env")
 
 User = get_user_model() # To use custom user seted in settings
 
-PROD = ENV['PROD'] == 'True'
-FIREBASE_CONFIG_JSON = 'firebase_config_prod.json' if PROD else 'firebase_config.json'
-cred = credentials.Certificate(os.path.join(BASE_DIR, FIREBASE_CONFIG_JSON))
+cred = credentials.Certificate(os.path.join(BASE_DIR, 'firebase_config.json'))
 
 initialize_app(cred)
 
