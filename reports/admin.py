@@ -5,13 +5,16 @@ from reports.models import Report, ReportType
 
 class ReportTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
-    readonly_fields=('id',)
     list_per_page = 10
     search_fields = ['name']
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('id')
+        return ()
+
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('report_type', 'id', 'user', 'active', 'created_at')
-    readonly_fields=('id', 'created_at')
     list_per_page = 10
     
     # Automcomplete select form
@@ -23,7 +26,8 @@ class ReportAdmin(admin.ModelAdmin):
         AutocompleteFilterFactory('Report type', 'report_type'),
         AutocompleteFilterFactory('User', 'user'),
         AutocompleteFilterFactory('User reported', 'user_reported'),
-        AutocompleteFilterFactory('Post reported', 'post_reported')
+        AutocompleteFilterFactory('Post reported', 'post_reported'),
+        'active'
     ]
 
 
@@ -33,6 +37,11 @@ class ReportAdmin(admin.ModelAdmin):
     def total_likes(self, obj):
         print(obj.created_at)
         return obj.likes.count()
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('id', 'created_at')
+        return ()
 
 # Register your models here.
 admin.site.register(ReportType, ReportTypeAdmin)

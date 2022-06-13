@@ -21,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
                 )
             }
         ),
-        ("Important dates", {"fields": ("created_at", "updated_at", "last_login")}),
+        ("Important dates", {"fields": ("created_at", "updated_at")}),
         (
             "Permissions",
             {

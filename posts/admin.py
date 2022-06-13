@@ -6,19 +6,26 @@ from admin_auto_filters.filters import AutocompleteFilterFactory
 # Model admins
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
-    readonly_fields=('id',)
     list_per_page = 10
     search_fields = ['name']
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('id',)
+        return ()
 
 class AcedemicLevelAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
-    readonly_fields=('id',)
     list_per_page = 10
     search_fields = ['name']
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('id',)
+        return ()
+
 class AxisAdmin(admin.ModelAdmin):
     list_display = ('name', 'id','subject__name')
-    readonly_fields=('id',)
     list_per_page = 10
     search_fields = ['name']
 
@@ -33,9 +40,13 @@ class AxisAdmin(admin.ModelAdmin):
     def subject__name(self, obj):
         return obj.subject.name
 
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('id',)
+        return ()
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'user', 'academic_level', 'subject', 'axis', 'id')
-    readonly_fields=('id', 'created_at', 'updated_at', 'total_likes')
     exclude = ('image',)
     list_per_page = 10
 
@@ -58,8 +69,15 @@ class PostAdmin(admin.ModelAdmin):
         return obj.axis.subject.name
     
     def total_likes(self, obj):
-        print(obj.created_at)
         return obj.likes.count()
+    
+    def total_views(self, obj):
+        return obj.views.count()
+    
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('id', 'created_at', 'updated_at', 'total_likes', 'total_views')
+        return ()
 
 # Register your models here.
 admin.site.register(Subject, SubjectAdmin)
