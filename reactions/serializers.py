@@ -1,4 +1,7 @@
+from requests import delete
 from rest_framework import serializers
+
+from posts.models import Post
 from .models import Like, View
 
 from firebase_admin import auth
@@ -15,6 +18,12 @@ class LikeSerializer(serializers.ModelSerializer):
             'post',
             'created_at',
         ]
+    
+    def create(self, validated_data):
+        post = validated_data['post']
+        post.total_likes += 1
+        post.save()
+        return super().create(validated_data)
 
 class ViewSerializer(serializers.ModelSerializer):
     firebase_user_id = serializers.CharField(max_length=2000)
@@ -48,3 +57,9 @@ class ViewSerializer(serializers.ModelSerializer):
         except Exception:
             raise serializers.ValidationError('Invalid ID Token')
         return firebase_uid
+
+    def create(self, validated_data):
+        post = validated_data['post']
+        post.total_views += 1
+        post.save()
+        return super().create(validated_data)

@@ -54,9 +54,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
     academic_level = AcademicLevelSerializer()
     axis = AxisSerializer()
 
-    likes = serializers.SerializerMethodField()
-    views = serializers.SerializerMethodField()
-
     # Already liked by request user
     already_liked = serializers.SerializerMethodField()
 
@@ -74,14 +71,10 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'suporting_material',
             'created_at',
             'updated_at',
-            'likes',
-            'views',
+            'total_likes',
+            'total_views',
             'already_liked'
         ]
-    
-    def get_likes(self, instance):
-        likes = instance.likes.all().count()
-        return likes
 
     def get_already_liked(self, instance):
         user = self.context['request'].user
@@ -92,10 +85,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
             except Exception:
                 return None
         return None
-    
-    def get_views(self, instance):
-        views = instance.views.all().count()
-        return views
 
 class PostCreateSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()

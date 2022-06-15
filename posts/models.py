@@ -36,5 +36,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    total_likes = models.IntegerField(default=0, blank=True)
+    total_views = models.IntegerField(default=0, blank=True)
+
     def __str__(self) -> str:
         return f'({self.id}) {self.title}';

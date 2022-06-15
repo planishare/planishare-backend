@@ -68,11 +68,11 @@ class PostAdmin(admin.ModelAdmin):
     def subject(self, obj):
         return obj.axis.subject.name
     
-    def total_likes(self, obj):
-        return obj.likes.count()
+    # def total_likes(self, obj):
+    #     return obj.likes.count()
     
-    def total_views(self, obj):
-        return obj.views.count()
+    # def total_views(self, obj):
+    #     return obj.views.count()
     
     def get_readonly_fields(self, request, obj=None):
         if obj:

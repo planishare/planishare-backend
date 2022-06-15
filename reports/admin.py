@@ -33,10 +33,6 @@ class ReportAdmin(admin.ModelAdmin):
 
     def report_type(self, obj):
         return obj.report_type.name
-    
-    def total_likes(self, obj):
-        print(obj.created_at)
-        return obj.likes.count()
 
     def get_readonly_fields(self, request, obj=None):
         if obj:

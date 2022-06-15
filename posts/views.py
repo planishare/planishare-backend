@@ -38,12 +38,7 @@ class SubjectWithAxisListAPIView(generics.ListAPIView):
     authentication_classes = []
 
 class PostListAPIView(generics.ListAPIView):
-    queryset = Post.objects \
-        .annotate(total_likes=Count('likes', distinct=True)) \
-        .annotate(total_views=Count('views', distinct=True)) \
-        .annotate(popular=Case(
-            When(GreaterThan(F('total_views'), 0), then=F('total_likes') / F('total_views'))
-        ))
+    queryset = Post.objects.all()
     
     serializer_class = PostDetailSerializer
 
@@ -55,29 +50,24 @@ class PostListAPIView(generics.ListAPIView):
         'axis__subject__name'
     ]
     filterset_fields = ['user__id', 'academic_level__id', 'axis__id', 'axis__subject__id']
-    ordering_fields = ['total_likes', 'total_views', 'popular', 'created_at']
+    ordering_fields = ['total_likes', 'total_views', 'created_at']
 
     pagination_class = CustomPageNumberPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostLikedListAPIView(generics.ListAPIView):
-    queryset = Post.objects.annotate(total_likes=Count('likes')).order_by('-total_likes')[:10]
+    queryset = Post.objects.order_by('-total_likes')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostViewedListAPIView(generics.ListAPIView):
-    queryset = Post.objects.annotate(total_views=Count('views')).order_by('-total_views')[:10]
+    queryset = Post.objects.order_by('-total_views')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class PostMostPopularListAPIView(generics.ListAPIView):
     queryset = Post.objects \
-        .annotate(total_likes=Count('likes', distinct=True)) \
-        .annotate(total_views=Count('views', distinct=True)) \
-        .annotate(popular=Case(
-            When(GreaterThan(F('total_views'), 0), then=F('total_likes') / F('total_views')),
-            When(LessThanOrEqual(F('total_views'), 0), then=0)
-        )) \
+        .annotate(popular=F('total_likes') / (F('total_views') + 0.00000000001)) \
         .order_by('-popular')[:10]
     serializer_class = PostDetailSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
