@@ -1,5 +1,7 @@
 import code
 from rest_framework import generics, permissions
+
+from api.models import LoginLog
 from .models import User
 from .serializers import UserDetailSerializer, UserUpdateSerializer, UserUpdatePasswordSerializer
 from api.permissions import isUserProfile
@@ -18,8 +20,14 @@ class UserDetailByEmailAPIView(APIView):
         try:
             user = User.objects.get(email=email)
             if user == request.user:
+                # Update user last login
                 user.last_login = timezone.now()
                 user.save(update_fields=['last_login'])
+
+                # Create login log
+                loginLog = LoginLog(user=user)
+                loginLog.save()
+
                 return Response(UserDetailSerializer(user).data)
             data = {'detail': 'Invalid ID token or dont have permissions'}
             return Response(data, 403)
