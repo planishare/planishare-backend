@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views import RegisterAPIView
+from api.views import CheckStatus, RegisterAPIView
 from locations.views import RegionWithCommunesListAPIView
 from occupations.views import InstitutionListAPIView, EducationtListAPIView
 from reports.views import ReportCreateAPIView
@@ -62,4 +62,7 @@ urlpatterns = [
     
     # Reports
     path('report/create/', ReportCreateAPIView.as_view(), name='create-report'),
+    
+    # Check status
+    path('status', CheckStatus.as_view(), name='check-status'),
 ]
