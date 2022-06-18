@@ -21,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
                 )
             }
         ),
-        ("Important dates", {"fields": ("created_at", "updated_at")}),
+        ("Important dates", {"fields": ("created_at", "updated_at", "last_login")}),
         (
             "Permissions",
             {
@@ -36,7 +36,7 @@ class CustomUserAdmin(UserAdmin):
         ),
         # ("Important dates", {"fields": ("last_login", "date_joined", "created_at", "updated_at")}),
     )
-    readonly_fields=('created_at', 'updated_at')
+    readonly_fields=('created_at', 'updated_at', 'last_login')
 
     # Campos que se mostrarán desde /admin al crear un nuevo usuario
     # En este caso deja el email en vez del username para crear un usuario
