@@ -7,6 +7,7 @@ from locations.serializers import CommuneSerializer
 from .models import User
 from reactions.models import Like, View
 from posts.models import Post
+from django.db.models import Sum
 
 from occupations.serializers import EducationSerializer, InstitutionSerializer
 
@@ -57,14 +58,12 @@ class UserDetailSerializer(serializers.ModelSerializer):
         ]
     
     def get_total_likes(self, obj):
-        # likes = obj.user_likes.all()
-        likes = Like.objects.filter(post__user=obj.id).count()
-        # data = LikeSerializer(likes, many=True).data
-        return likes
+        likes = Post.objects.filter(user=obj.id).aggregate(Sum('total_likes'))
+        return likes['total_likes__sum']
     
     def get_total_views(self, obj):
-        views = View.objects.filter(post__user=obj.id).count()
-        return views
+        views = Post.objects.filter(user=obj.id).aggregate(Sum('total_views'))
+        return views['total_views__sum']
 
     def get_total_posts(self, obj):
         posts = Post.objects.filter(user=obj.id).count()

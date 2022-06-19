@@ -19,7 +19,7 @@ from posts.views import (
     PostDeleteAPIView,
     SubjectWithAxisListAPIView
 )
-from reactions.views import LikeCreateAPIView, LikeDeleteAPIView, ViewCreateAPIView
+from reactions.views import LikeCreateAPIView, LikeDeleteAPIView, ToggleLikeAPIView, ViewCreateAPIView
 
 urlpatterns = [
     # Authentication
@@ -58,6 +58,7 @@ urlpatterns = [
     # Reactions
     path('likes/create/', LikeCreateAPIView.as_view(), name='create-like'),
     path('likes/delete/<int:pk>/', LikeDeleteAPIView.as_view(), name='delete-like'),
+    path('likes/toggle/', ToggleLikeAPIView.as_view(), name='toggle-like'),
     path('views/create/', ViewCreateAPIView.as_view(), name='create-view'),
     
     # Reports
