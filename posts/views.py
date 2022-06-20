@@ -69,7 +69,7 @@ class PostMostPopularListAPIView(generics.ListAPIView):
     queryset = Post.objects \
         .annotate(popular=Case(
             When(LessThanOrEqual(F('total_likes'), F('total_views')), then=F('total_likes')*65 + F('total_views')*35),
-            When(GreaterThan(F('total_likes'), F('total_views')), then=F('total_views')*100)
+            When(GreaterThan(F('total_likes'), F('total_views')), then=F('total_likes')*1 + F('total_views')*99)
         )) \
         .order_by('-popular')[:10]
     serializer_class = PostDetailSerializer
