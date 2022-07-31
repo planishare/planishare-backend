@@ -162,5 +162,8 @@ REST_FRAMEWORK = {
 
 # Cors configuration
 CORS_URLS_REGEX = r'^/api/.*'  # Solo considere las rutas que sean parte de la api
-CORS_ALLOWED_ORIGINS = [getenv('PLANISHARE_URL')]
+if getenv('APP_ENV') == 'production':
+    CORS_ALLOWED_ORIGINS = [getenv('PLANISHARE_URL')]
+else:
+    CORS_ALLOWED_ORIGINS = [getenv('PLANISHARE_URL'), 'http://localhost:4200']
 CORS_ALLOW_CREDENTIALS = True
