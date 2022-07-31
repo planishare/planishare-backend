@@ -11,34 +11,23 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import dotenv_values, load_dotenv
-
-load_dotenv()
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV = dotenv_values(".env")
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ENV['SECRET_KEY']
+SECRET_KEY = getenv('APP_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ENV['DEBUG'] == 'True'
+DEBUG = getenv('APP_DEBUG') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    'planishare-backend-dev.azurewebsites.net',
-    'planishare-backend.azurewebsites.net'
-]
+ALLOWED_HOSTS = [getenv('APP_HOST')]
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://planishare-backend-dev.azurewebsites.net',
-    'https://planishare-backend.azurewebsites.net'
-]
+CSRF_TRUSTED_ORIGINS = ['https://' + getenv('APP_HOST')] if getenv('APP_ENV') != 'localhost' else []
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -105,22 +94,14 @@ WSGI_APPLICATION = 'planishare.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-
-    # Postgres Database config
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': ENV['NAME'],
-        'USER': ENV['USER'],
-        'PASSWORD': ENV['PASSWORD'],
-        'HOST': ENV['HOST'],
-        'PORT': ENV['PORT'],
-        'OPTIONS': {
-            'sslmode': 'require'
-        }
+        'NAME': getenv('DB_NAME'),
+        'USER': getenv('DB_USER'),
+        'PASSWORD': getenv('DB_PASSWORD'),
+        'HOST': getenv('DB_HOST'),
+        'PORT': getenv('DB_PORT'),
+        'OPTIONS': { 'sslmode': 'require' } if getenv('APP_ENV') != 'localhost' else {}
     }
 }
 
@@ -163,6 +144,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Settings for deploy
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -180,10 +162,5 @@ REST_FRAMEWORK = {
 
 # Cors configuration
 CORS_URLS_REGEX = r'^/api/.*'  # Solo considere las rutas que sean parte de la api
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',
-    'http://192.168.1.207:4200',
-    'https://planishare-dev.web.app',
-    'https://planishare.web.app',
-]
+CORS_ALLOWED_ORIGINS = [getenv('PLANISHARE_URL')]
 CORS_ALLOW_CREDENTIALS = True

@@ -5,10 +5,6 @@ from rest_framework import exceptions
 from firebase_admin import auth, initialize_app, credentials
 
 from planishare.settings import BASE_DIR
-from dotenv import dotenv_values, load_dotenv
-
-load_dotenv()
-ENV = dotenv_values(".env")
 
 User = get_user_model() # To use custom user seted in settings
 
