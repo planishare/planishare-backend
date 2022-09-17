@@ -12,4 +12,4 @@ class LoginLogAdmin(admin.ModelAdmin):
             return ('id','created_at')
         return ()
 
-# admin.site.register(LoginLog, LoginLogAdmin)
+admin.site.register(LoginLog, LoginLogAdmin)

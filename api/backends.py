@@ -12,8 +12,7 @@ cred = credentials.Certificate(os.path.join(BASE_DIR, 'firebase_config.json'))
 
 initialize_app(cred)
 
-# Authenticate with firebase accessToken
-# If token is from anonymous sesion then dont do the authentication
+# Authenticate with firebase accessToken and looking for user's email
 class FirebaseBackend(authentication.BaseAuthentication):
     def authenticate(self, request):
         # Get WWW-Authorization
