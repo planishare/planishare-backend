@@ -12,8 +12,12 @@ User = get_user_model() # To use custom user seted in settings
 cred = credentials.Certificate(os.path.join(BASE_DIR, 'firebase_config.json'))
 initialize_app(cred)
 
-# Authenticate user
+# NOTE: Remove raise exceptions if you want to use another authentication method together with this one
 class FirebaseAuth(authentication.BaseAuthentication):
+    '''
+    Authenticate user usign Firebase
+    '''
+
     def authenticate(self, request):
         # Get auth header
         authorization_header = request.META.get("HTTP_AUTHORIZATION")
@@ -28,10 +32,8 @@ class FirebaseAuth(authentication.BaseAuthentication):
         # Decode token
         try:
             decoded_token = auth.verify_id_token(token)
-        except auth.ExpiredIdTokenError or auth.InvalidIdTokenError:
-            raise exceptions.AuthenticationFailed('Expired or invalid token')
-        except auth.RevokedIdTokenError:
-            raise exceptions.AuthenticationFailed('Auth token has revoked')
+        except Exception as e:
+            raise exceptions.AuthenticationFailed(e)
 
         # If user is anonymous, then NO authenticate but pass decoded token
         if (decoded_token['firebase']['sign_in_provider'] == 'anonymous'):

@@ -154,14 +154,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        # Third party
-        # 'api.backends.FirebaseBackend',
-        'api.authentication.FirebaseAuth' #TODO: remove this
-    ]
-}
-
 # Cors configuration
 CORS_URLS_REGEX = r'^/api/.*'  # Solo considere las rutas que sean parte de la api
 if getenv('APP_ENV') == 'production':
