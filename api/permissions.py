@@ -50,12 +50,8 @@ class IsAuthOrFirebaseAnon(permissions.IsAuthenticated):
     # Check post request
     def has_permission(self, request, view):
         if (request.user and request.user.is_authenticated):
-            print('IS AUTHENTICATED')
             return True
             
         if (request.auth):
-            print('IS ANONYMOUS')
             return request.auth['firebase']['sign_in_provider'] == 'anonymous'
-
-        print('NO AUTH AND NO ANONYMOUS')
         return False
