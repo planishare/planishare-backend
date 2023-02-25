@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-class isOwner(permissions.BasePermission):
+class IsOwner(permissions.BasePermission):
     """
     Allows obj access only to user owner.
     Only for models where owner field is called 'user'
@@ -21,8 +21,7 @@ class isOwner(permissions.BasePermission):
                 return False
         return True
         
-# TODO: Use upper cammel case for classes
-class isUserProfile(permissions.BasePermission):
+class IsUserProfile(permissions.BasePermission):
     """
     Allows user obj access only to user owner.
     """

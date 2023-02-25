@@ -1,6 +1,6 @@
 from django.urls import path
 from api.authentication import FirebaseAuth
-from api.permissions import IsAuthOrFirebaseAnon, isUserProfile, isOwner
+from api.permissions import IsAuthOrFirebaseAnon, IsUserProfile, IsOwner
 from rest_framework.permissions import IsAuthenticated
 
 from api.views import CheckStatus, RegisterAPIView
@@ -59,7 +59,7 @@ urlpatterns = [
     # Users
     protected('users/<int:pk>/', UserDetailAPIView, allow_anon=True, name='detail-user'),
     protected('users/by-email/<str:email>/', UserDetailByEmailAPIView, name='detail-user-by-email'),
-    protected('users/update/<int:pk>/', UserUpdateAPIView, extra_permissions=[isUserProfile], name='update-user'),
+    protected('users/update/<int:pk>/', UserUpdateAPIView, extra_permissions=[IsUserProfile], name='update-user'),
     protected('users/is-email-available/<str:email>/', IsEmailAvailable, allow_anon=True, name='is-email-available'),
     
     # Posts
@@ -69,19 +69,19 @@ urlpatterns = [
     protected('subjects-with-axis/', SubjectWithAxisListAPIView, allow_anon=True, name='list-subjects-axis'),
     
     protected('posts/', PostListAPIView, allow_anon=True, name='list-posts'),
-    protected('posts/create/', PostCreateAPIView, extra_permissions=[isOwner],  name='create-posts'),
+    protected('posts/create/', PostCreateAPIView, extra_permissions=[IsOwner],  name='create-posts'),
     protected('posts/<int:pk>/', PostDetailAPIView, allow_anon=True, name='detail-posts'),
-    protected('posts/delete/<int:pk>/', PostDeleteAPIView, extra_permissions=[isOwner], name='delete-posts'),
-    protected('posts/update/<int:pk>/', PostUpdateAPIView, extra_permissions=[isOwner], name='update-posts'),
+    protected('posts/delete/<int:pk>/', PostDeleteAPIView, extra_permissions=[IsOwner], name='delete-posts'),
+    protected('posts/update/<int:pk>/', PostUpdateAPIView, extra_permissions=[IsOwner], name='update-posts'),
 
     # Reactions
-    protected('likes/create/', LikeCreateAPIView, extra_permissions=[isOwner], name='create-like'),
-    protected('likes/delete/<int:pk>/', LikeDeleteAPIView, extra_permissions=[isOwner], name='delete-like'),
+    protected('likes/create/', LikeCreateAPIView, extra_permissions=[IsOwner], name='create-like'),
+    protected('likes/delete/<int:pk>/', LikeDeleteAPIView, extra_permissions=[IsOwner], name='delete-like'),
     protected('likes/toggle/', ToggleLikeAPIView, name='toggle-like'), # TODO: Refactor this to use permissions
     protected('views/create/', ViewCreateAPIView, name='create-view'), # TODO: Refactor this to use permissions
     
     # Reports
-    protected('report/create/', ReportCreateAPIView, extra_permissions=[isOwner], name='create-report'),
+    protected('report/create/', ReportCreateAPIView, extra_permissions=[IsOwner], name='create-report'),
 
     # Check status
     path('status', CheckStatus.as_view(), name='check-status'),
