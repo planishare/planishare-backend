@@ -12,7 +12,6 @@ from .serializers import (
 
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
-from api.permissions import isOwner
 from api.utils import CustomPageNumberPagination
 from django.db.models import F, When, Case
 from django.db.models.lookups import GreaterThan, LessThanOrEqual

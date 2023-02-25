@@ -1,5 +1,4 @@
 from rest_framework import generics, permissions
-from api.permissions import isOwner
 
 from reports.models import Report
 from reports.serializers import ReportSerializer

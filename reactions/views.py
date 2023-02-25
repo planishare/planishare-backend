@@ -5,7 +5,6 @@ from posts.models import Post
 from users.models import User
 from .models import Like, View
 from .serializers import LikeSerializer, ViewSerializer
-from api.permissions import isOwner
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions
