@@ -4,7 +4,6 @@ from rest_framework import generics, permissions
 from api.models import LoginLog
 from .models import User
 from .serializers import UserDetailSerializer, UserUpdateSerializer, UserUpdatePasswordSerializer
-from api.permissions import isUserProfile
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions
