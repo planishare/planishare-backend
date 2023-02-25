@@ -42,7 +42,6 @@ class ViewSerializer(serializers.ModelSerializer):
         try:
             user = self.context['request'].user
             if (user):
-                print(user)
                 attrs['user'] = user if user.is_authenticated else None
         except Exception:
             raise serializers.ValidationError('Failed getting authenticated user')
