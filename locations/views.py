@@ -6,4 +6,3 @@ from locations.serializers import RegionSerializer
 class RegionWithCommunesListAPIView(generics.ListAPIView):
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
-    authentication_classes = []

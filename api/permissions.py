@@ -21,7 +21,7 @@ class isOwner(permissions.BasePermission):
                 return False
         return True
         
-
+# TODO: Use upper cammel case for classes
 class isUserProfile(permissions.BasePermission):
     """
     Allows user obj access only to user owner.
@@ -41,3 +41,17 @@ class isUserProfile(permissions.BasePermission):
             except:
                 return False
         return True
+
+class IsAuthOrFirebaseAnon(permissions.IsAuthenticated):
+    """
+     Allows obj access to Firebase anonymous user.
+    """
+
+    # Check post request
+    def has_permission(self, request, view):
+        if (request.user and request.user.is_authenticated):
+            return True
+            
+        if (request.auth):
+            return request.auth['firebase']['sign_in_provider'] == 'anonymous'
+        return False
