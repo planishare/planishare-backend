@@ -28,7 +28,8 @@ DEBUG = getenv('APP_DEBUG') == 'True'
 
 ALLOWED_HOSTS = [getenv('APP_HOST')]
 
-CSRF_TRUSTED_ORIGINS = ['https://' + getenv('APP_HOST')] if getenv('APP_ENV') != 'localhost' else []
+if (getenv('APP_HOST') and getenv('APP_ENV') != 'localhost'):
+    CSRF_TRUSTED_ORIGINS = ['https://' + getenv('APP_HOST')]
 
 AUTH_USER_MODEL = 'users.User'
 
