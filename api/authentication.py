@@ -1,15 +1,14 @@
 import os
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AnonymousUser
 from rest_framework import authentication
 from rest_framework import exceptions
 from firebase_admin import auth, initialize_app, credentials
-
-from planishare.settings import BASE_DIR
+import json
 
 User = get_user_model() # To use custom user seted in settings
 
-cred = credentials.Certificate(os.path.join(BASE_DIR, 'firebase_config.json'))
+cred_envs = json.loads(os.getenv("FIREBASE_JSON_CONFIG"))
+cred = credentials.Certificate(cred_envs)
 initialize_app(cred)
 
 class FirebaseAuth(authentication.BaseAuthentication):
