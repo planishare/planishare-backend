@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-class isOwner(permissions.BasePermission):
+class IsOwner(permissions.BasePermission):
     """
     Allows obj access only to user owner.
     Only for models where owner field is called 'user'
@@ -21,8 +21,7 @@ class isOwner(permissions.BasePermission):
                 return False
         return True
         
-
-class isUserProfile(permissions.BasePermission):
+class IsUserProfile(permissions.BasePermission):
     """
     Allows user obj access only to user owner.
     """
@@ -41,3 +40,17 @@ class isUserProfile(permissions.BasePermission):
             except:
                 return False
         return True
+
+class IsAuthOrFirebaseAnon(permissions.IsAuthenticated):
+    """
+     Allows obj access to Firebase anonymous user.
+    """
+
+    # Check post request
+    def has_permission(self, request, view):
+        if (request.user and request.user.is_authenticated):
+            return True
+            
+        if (request.auth):
+            return request.auth['firebase']['sign_in_provider'] == 'anonymous'
+        return False

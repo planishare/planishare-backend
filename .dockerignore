@@ -1,0 +1,21 @@
+# Django
+**/__pycache__
+
+# PostgreSQL
+**/*.sql
+**/*.dump
+
+# VSCode
+.vscode
+.settings
+**/.vscode
+
+# Git
+.git
+.gitignore
+
+# Enviroment variables
+docker-compose.yml
+docker-compose.*.yml
+**/.env
+**/.env.*

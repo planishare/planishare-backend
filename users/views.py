@@ -4,7 +4,6 @@ from rest_framework import generics, permissions
 from api.models import LoginLog
 from .models import User
 from .serializers import UserDetailSerializer, UserUpdateSerializer, UserUpdatePasswordSerializer
-from api.permissions import isUserProfile
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import exceptions
@@ -13,7 +12,6 @@ from django.utils import timezone
 class UserDetailAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserDetailSerializer
-    authentication_classes = []
 
 class UserDetailByEmailAPIView(APIView):
     def get(self, request, email, format=None):
@@ -29,6 +27,8 @@ class UserDetailByEmailAPIView(APIView):
                 loginLog.save()
 
                 return Response(UserDetailSerializer(user).data)
+
+            # TODO: Use exceptions
             data = {'detail': 'Invalid ID token or dont have permissions'}
             return Response(data, 403)
         except Exception:
@@ -39,15 +39,8 @@ class UserDetailByEmailAPIView(APIView):
 class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
-    permission_classes = [permissions.IsAuthenticated, isUserProfile]
-
-class UserUpdatePasswordAPIView(generics.UpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserUpdatePasswordSerializer
 
 class IsEmailAvailable(APIView):
-    authentication_classes = []
-
     def get(self, request, email, format=None):
         user = User.objects.filter(email=email);
         if (len(user)):

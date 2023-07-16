@@ -28,7 +28,8 @@ DEBUG = getenv('APP_DEBUG') == 'True'
 
 ALLOWED_HOSTS = [getenv('APP_HOST')]
 
-CSRF_TRUSTED_ORIGINS = ['https://' + getenv('APP_HOST')] if getenv('APP_ENV') != 'localhost' else []
+if (getenv('APP_HOST') and getenv('APP_ENV') != 'localhost'):
+    CSRF_TRUSTED_ORIGINS = ['https://' + getenv('APP_HOST')]
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -153,13 +154,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        # Third party
-        'api.backends.FirebaseBackend',
-    ]
-}
 
 # Cors configuration
 CORS_URLS_REGEX = r'^/api/.*'  # Solo considere las rutas que sean parte de la api
