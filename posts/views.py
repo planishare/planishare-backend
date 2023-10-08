@@ -44,7 +44,7 @@ class PostListAPIView(generics.ListAPIView):
         'axis__name',
         'axis__subject__name'
     ]
-    filterset_fields = ['user__id', 'academic_level__id', 'axis__id', 'axis__subject__id']
+    filterset_fields = ['user__email', 'academic_level__id', 'axis__id', 'axis__subject__id']
     ordering_fields = ['total_likes', 'total_views', 'created_at']
 
     pagination_class = CustomPageNumberPagination
