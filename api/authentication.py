@@ -21,22 +21,19 @@ class FirebaseAuth(authentication.BaseAuthentication):
             # Get auth header
             authorization_header = request.META.get("HTTP_AUTHORIZATION")
             if not authorization_header:
-                raise exceptions.AuthenticationFailed('Auth header not provided')
+                return (None, None)
+                # raise exceptions.AuthenticationFailed('Auth header not provided')
 
             # Get token
             token = authorization_header.split(" ").pop()
             if not token:
-                raise exceptions.AuthenticationFailed('Auth token not provided')
+                raise exceptions.AuthenticationFailed('Invalid token provided.')
 
             # Decode token
             try:
                 decoded_token = auth.verify_id_token(token)
             except Exception as e:
                 raise exceptions.AuthenticationFailed(e)
-
-            # If user is anonymous, then NO authenticate but pass decoded token
-            if (decoded_token['firebase']['sign_in_provider'] == 'anonymous'):
-                return (None, decoded_token)
             
             # If user exist in Planishare database, then authenticate and pass decoded token
             try:
@@ -44,6 +41,6 @@ class FirebaseAuth(authentication.BaseAuthentication):
                 user = User.objects.get(email=email)
                 return (user, decoded_token)
             except User.DoesNotExist:
-                raise exceptions.AuthenticationFailed("User not found in Planishare database: " + email)
+                raise exceptions.AuthenticationFailed("User " + email + " not found in Planishare database.")
         except Exception as e:
-            return (None, None)
+            raise exceptions.AuthenticationFailed(e)

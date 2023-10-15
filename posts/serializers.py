@@ -54,8 +54,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
     academic_level = AcademicLevelSerializer()
     axis = AxisSerializer()
 
-    # Already liked by request user
     already_liked = serializers.SerializerMethodField()
+    is_owner = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -73,7 +73,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
             'updated_at',
             'total_likes',
             'total_views',
-            'already_liked'
+            'already_liked',
+            'is_owner'
         ]
 
     def get_already_liked(self, instance):
@@ -85,6 +86,12 @@ class PostDetailSerializer(serializers.ModelSerializer):
             except Exception:
                 return None
         return None
+
+    def get_is_owner(self, instance):
+        user = self.context['request'].user
+        if (user != None):
+            return user.id == instance.user.id
+        return False
 
 class PostCreateSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
