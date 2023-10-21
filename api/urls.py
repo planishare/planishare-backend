@@ -11,12 +11,8 @@ from users.views import IsEmailAvailable, UserDetailAPIView, UserDetailByEmailAP
 from posts.views import (
     AcademicLevelListAPIView,
     AxisListAPIView,
-    PostMostPopularListAPIView,
-    PostMostViewedListAPIView,
     SubjectListAPIView,
     PostListAPIView,
-    PostMostLikedListAPIView,
-    PostLatestListAPIView,
     PostCreateAPIView,
     PostDetailAPIView,
     PostUpdateAPIView,
@@ -25,16 +21,24 @@ from posts.views import (
 )
 from reactions.views import LikeCreateAPIView, LikeDeleteAPIView, ToggleLikeAPIView, ViewCreateAPIView
 
-def protected(route, api_view, extra_permissions=[], allow_anon=False, name=None):
+def public(route, api_view, name=None):
     '''
-    Creates a protected route for authenticated or anonymous Firebase users.
+    Creates a public route.
     '''
-    prefix = 'protected/' if not allow_anon else 'protected/a/'
+    route = 'public/' + route
+    return path(route, api_view.as_view(), name=name)
+
+def protected(route, api_view, extra_permissions=[], must_auth=True, name=None):
+    '''
+    Creates a protected route using FirebaseAuth as default authentication class.
+    '''
+
+    # If not must_auth allow no authentication
+    prefix = 'protected/' if must_auth else 'protected/allow-no-auth/'
     route = prefix + route
 
     authentication_classes = [FirebaseAuth]
-    permission_classes = [IsAuthOrFirebaseAnon if allow_anon else IsAuthenticated]
-    permission_classes = permission_classes + extra_permissions
+    permission_classes = ([IsAuthenticated] if must_auth else []) + extra_permissions
 
     return path(
         route,
@@ -47,30 +51,30 @@ def protected(route, api_view, extra_permissions=[], allow_anon=False, name=None
 
 urlpatterns = [
     # Authentication
-    protected('auth/register/', RegisterAPIView, allow_anon=True, name='register-user'),
+    public('auth/register/', RegisterAPIView, name='register-user'),
 
     # Ocupations
-    protected('educations/', EducationtListAPIView, allow_anon=True, name='list-educations'),
-    protected('institutions/', InstitutionListAPIView, allow_anon=True, name='list-institutions'),
+    public('educations/', EducationtListAPIView, name='list-educations'),
+    public('institutions/', InstitutionListAPIView, name='list-institutions'),
 
     # Locations
-    protected('regions-with-communes/', RegionWithCommunesListAPIView, allow_anon=True, name='list-regions-communes'),
+    public('regions-with-communes/', RegionWithCommunesListAPIView, name='list-regions-communes'),
     
     # Users
-    protected('users/<int:pk>/', UserDetailAPIView, allow_anon=True, name='detail-user'),
-    protected('users/by-email/<str:email>/', UserDetailByEmailAPIView, name='detail-user-by-email'),
+    # public('users/<int:pk>/', UserDetailAPIView, name='detail-user'),
+    protected('users/by-email/<str:email>/', UserDetailByEmailAPIView, extra_permissions=[IsUserProfile], name='detail-user-by-email'),
     protected('users/update/<int:pk>/', UserUpdateAPIView, extra_permissions=[IsUserProfile], name='update-user'),
-    protected('users/is-email-available/<str:email>/', IsEmailAvailable, allow_anon=True, name='is-email-available'),
+    public('users/is-email-available/<str:email>/', IsEmailAvailable, name='is-email-available'),
     
     # Posts
-    protected('academic-levels/', AcademicLevelListAPIView, allow_anon=True, name='list-academic-levels'),
-    protected('axis/', AxisListAPIView, allow_anon=True, name='list-axis'),
-    protected('subjects/', SubjectListAPIView, allow_anon=True, name='list-subjects'),
-    protected('subjects-with-axis/', SubjectWithAxisListAPIView, allow_anon=True, name='list-subjects-axis'),
+    public('academic-levels/', AcademicLevelListAPIView, name='list-academic-levels'),
+    public('axis/', AxisListAPIView, name='list-axis'),
+    public('subjects/', SubjectListAPIView, name='list-subjects'),
+    public('subjects-with-axis/', SubjectWithAxisListAPIView, name='list-subjects-axis'),
     
-    protected('posts/', PostListAPIView, allow_anon=True, name='list-posts'),
+    protected('posts/', PostListAPIView, must_auth=False, name='list-posts'),
     protected('posts/create/', PostCreateAPIView, extra_permissions=[IsOwner],  name='create-posts'),
-    protected('posts/<int:pk>/', PostDetailAPIView, allow_anon=True, name='detail-posts'),
+    protected('posts/<int:pk>/', PostDetailAPIView, must_auth=False, name='detail-posts'),
     protected('posts/delete/<int:pk>/', PostDeleteAPIView, extra_permissions=[IsOwner], name='delete-posts'),
     protected('posts/update/<int:pk>/', PostUpdateAPIView, extra_permissions=[IsOwner], name='update-posts'),
 
