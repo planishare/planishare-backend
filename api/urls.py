@@ -82,7 +82,7 @@ urlpatterns = [
     protected('likes/create/', LikeCreateAPIView, extra_permissions=[IsOwner], name='create-like'),
     protected('likes/delete/<int:pk>/', LikeDeleteAPIView, extra_permissions=[IsOwner], name='delete-like'),
     protected('likes/toggle/', ToggleLikeAPIView, name='toggle-like'), # TODO: Refactor this to use permissions
-    protected('views/create/', ViewCreateAPIView, name='create-view'), # TODO: Refactor this to use permissions
+    public('views/create/', ViewCreateAPIView, name='create-view'),
     
     # Reports
     protected('report/create/', ReportCreateAPIView, extra_permissions=[IsOwner], name='create-report'),
